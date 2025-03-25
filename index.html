@@ -1,18 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Copy Text Buttons</title>
     <style>
-        button {
-            margin: 5px;
-        }
-
         body {
             background-color: #f0f0f0;
-            /* Light gray background */
             font-family: Arial, sans-serif;
             text-align: center;
         }
@@ -22,602 +16,725 @@
             padding: 10px;
             font-size: 16px;
             background-color: #ddd;
-            /* Light gray button background */
             border: 1px solid #aaa;
-            /* Dark gray border */
             cursor: pointer;
         }
 
         button:hover {
             background-color: #ccc;
-            /* Slightly darker background on hover */
         }
     </style>
 </head>
 
 <body>
 
-    <button onclick="copyText(text1)">Simple linear</button>
-    <button onclick=" copyText(text2)">nnbipolarbinarysig</button>
-    <button onclick="copyText(text3)">&!McPitts</button>
-    <button onclick="copyText(text4)">XOR</button>
-    <button onclick="copyText(text5)">Hebb </button>
-    <button onclick="copyText(text6)">Delta</button>
-    <button onclick="copyText(text7)">BPA </button>
-    <button onclick="copyText(text8)">LSepar</button>
-    <button onclick="copyText(text9)">hopfi </button>
-    <button onclick="copyText(text10)">koh </button>
-    <button onclick="copyText(text11)">ART </button>
-    <button onclick="copyText(text12)">identity </button>
-    <button onclick="copyText(text13)">mem&iden </button>
-    <button onclick="copyText(text14)">ratio </button>
-    <button onclick="copyText(text15)">tipp </button>
-    
-    
+    <h2>Click to Copy Code Snippets</h2>
+
+    <button onclick="copyText(text1, 'MVC Code')">MVC</button>
+<button onclick="copyText(text2, 'RESTAPI')">corerestapi</button>
+<button onclick="copyText(text3, 'DImCon')">DImCon</button>
+<button onclick="copyText(text4, 'Vol&Netw')">Vol&Netw</button>
+<button onclick="copyText(text5, 'dockswarm')">Swarm</button>
+<button onclick="copyText(text6, 'CircleCI')">CircleCI</button>
+<button onclick="copyText(text7, 'Kubernetes')">kuber</button>
+<button onclick="copyText(text7, 'microservice')">MicAsp</button>
+
     <p id="copiedMsg"></p>
+
     <script>
+        var text1 = `a. StudentModel.cs:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.ComponentModel.DataAnnotations;
+namespace _34_MA_Practical1.Models
+{
+    public class StudentModel
+    {
+        [Required(ErrorMessage = "Student Roll Number is required.")]
+        public string RollNo { get; set; }
+        [Required(ErrorMessage = "Student First Name is required.")]
+        public string FirstName { get; set; }
+        [Required(ErrorMessage = "Student Last Name is required.")]
+        public string LastName { get; set; }
+        [Required(ErrorMessage = "Student Address is required.")]
+        public string Address { get; set; }
+        [Required(ErrorMessage = "Student Class is required.")]
+        public string Class { get; set; }
+        [Required(ErrorMessage = "Student Age is required.")]
+        public string Age { get; set; }
+        [Required(ErrorMessage = "Student Contact Number is required.")]
+        public string ContactNumber { get; set; }
+    }
+}
 
-        var text1= `
-print("Practical Performed by: Roshni Gupta , Roll No : 09")
-print("Enter the value of x1:-")
-x1 = float(input())
-print("Enter the value of x2:-")
-x2 = float(input())
-print("Enter the value of w1:-")
-w1 = float(input())
-print("Enter the value of w2:-")
-w2 = float(input())
-print("Calculating Net Input: ")
-net_input = x1 * w1 + x2 * w2
-("Net Input : ", net_input)
-print("Applying Activation Function:")
-threshold = 0
-if net_input >= threshold:
-    	print("1")
-else:
-    	print("0")
+b. StudentController:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using _34_MA_Practical1.Models;
 
-         `;
+namespace _34_MA_Practical1.Controllers
+{
+    public class StudentController : Controller
+    {
+        public ActionResult Index()
+        {
+            return View();
+        }
+        public ActionResult Student()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Student(StudentModel obj)
+        {
+            ViewBag.Txt1 = "Congratulations!!! You have been Registered Successfully!!!";
+            ViewBag.Txt2 = "Your Details are as follows:";
+            ViewBag.Txt3 = "Roll Number = " + obj.RollNo;
+            ViewBag.Txt4 = "Name = " + obj.FirstName + " " + obj.LastName;
+            ViewBag.Txt5 = "Class = " + obj.Class;
+            ViewBag.Txt6 = "Address = " + obj.Address;
+            ViewBag.Txt7 = "Age = " + obj.Age;
+            ViewBag.Txt8 = "Contact Number = " + obj.ContactNumber;
+            ViewBag.Txt9 = "Thank You! We'll Get Back to you soon.";
+            return View();
+        }
+    }
+}
 
-        var text2 = ` 
-import math
-print("Practical Performed by: Roshni Gupta , Roll No : 09")
-x1=0.3
-x2=0.5
-x3=0.6
-print("Value of x1= ",x1)
-print("Value of x2= ",x2)
-print("Value of x3= ",x3)
-w1=0.2
-w2=0.1
-w3=-0.3
-print("Value of w1= ",w1)
-print("Value of w2= ",w2)
-print("Value of w3= ",w3)
-yin=x1*w1 + x2*w2 + x3*w3
-print("Net Input :",yin)
-#Applying Binary Sigmoidal function
-funct_x1= 1/(1+math.exp(-yin))
-print("After applying sigmoidal function: ",funct_x1)
-#Applying Bipolar Sigmoidal function
-funct_x2= (1-math.exp(-yin))/(1+math.exp(-yin))
-print("After applying Bipolar sigmoidal function: ",funct_x2)
+c. Index.cshtml:
+@{
+    ViewBag.Title = "Index";
+}
+<h2>Index</h2>
 
-     
-`;
-
-        var text3 = `
- print("Practical Performed by: Roshni Gupta , Roll No : 09")
-num_ip=int(input("Enter the no of inputs:"))
-w1=1
-w2=1
-print("for the",num_ip,"inputs calculates the net input")
-x1=[]
-x2=[]
-for i in range(0,num_ip):
- e1=int(input("x1="))
- e2=int(input("x2="))
- x1.append(e1)
- x2.append(e2)
- print("x1=",x1)
- print("x2=",x2)
- n=[w1*i for i in x1]
- m=[w2*i for i in x2]
- Yin=[]
-for i in range(0,num_ip):
- Yin.append(n[i]+m[i])
-print("\n Excitetory weight")
-print("Yin=",Yin)
-#Assume one weight as excitetory and one as inhibitory
-w1=1
-w2=-1
-n=[w1*i for i in x1]
-m=[w2*i for i in x2]
-Yin=[]
-for i in range(0,num_ip):
-    Yin.append(n[i]+m[i])
-print("\n Excitetory weight")
-print("Yin=",Yin)
-print("\n after assuming one weight as excitetory and one as inhibitory")
-y=[]
-for i in range(0,num_ip):
- if(Yin[i]>=1):
-     e=1
-     y.append(e)
- if(Yin[i]<1):
-     e=0
-     y.append(e)
- print("y=",y)
-
-`;
-
-        var text4 = `
-import numpy as np
-print("enter weights")
-w11=int(input('weight w11='))
-w12=int(input('weight w12='))
-w21=int(input('weight w21='))
-w22=int(input('weight w22='))
-v1=int(input('weight v1='))
-v2=int(input('weight v2='))
-print('Enter threshold Values')
-theta=int(input('theta='))
-x1=np.array([0,0,1,1])
-x2=np.array([0,1,0,1])
-z=np.array([0,1,1,0])
-y1=np.zeros((4,))
-y2=np.zeros((4,))
-y=np.zeros((4,))
-zin1=np.zeros((4,))
-zin2=np.zeros((4,))
-zin1=x1*w11+x2*w21
-zin2=x1*w21+x2*w22
-print("z1",zin1)
-print("z2",zin2)
-for i in range(0,4):
- if zin1[i]>=theta:
-     y1[i]=1
- else:
-     y1[i]=0
- if zin2[i]>=theta:
-     y2[i]=1
- else:
-     y2[i]=0
-yin=np.array([])
-yin=y1*v1+y2*v2
-for i in range(0,4):
- if yin[i]>=theta:
-     y[i]=1
- else:
-     y[i]=0
-print("yin",yin)
-print('output of net')
-y=y.astype(int)
-print("y",y)
-print("z",z)
-
-
-        `;
-
-        var text5 = `
-X = [[1,1], [1,-1], [-1,1], [-1,-1]]
-print("Inputs = ")
-for x in X:
- print(x)
-Y = [1,-1,-1,-1]
-print("Target = ",Y)
-w = [0,0]
-print("Initial weight values = ", w)
-for i in range(len(X)):
- for j in range(len(w)):
-     w[j] = w[j] + X[i][j] + Y[i]
- print(i, "Iteration, Weight values = ",w)
-
-
+d. Student.cshtml:
+@model _34_MA_Practical1.Models.StudentModel
+@{
+    ViewBag.Title = "Student";
+}
+<h2>Roshni Gupta's first ASP .Net MVC Application</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <h4>Student Registration Form</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.RollNo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.RollNo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.RollNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Class, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Class, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Class, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ContactNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ContactNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ContactNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+            <div class="col-md-offset-2 col-md-10 text-success">
+                <h3>@ViewBag.Txt1</h3>
+            </div>
+        </div>
+    </div>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
 
 `;
 
-        var text6 = `
-print("Practical Performed by: Roshni Gupta , Roll No : 09")
-import numpy as np
-import time
-np.set_printoptions(precision=9)
-x=np.zeros((3,))
-weights=np.zeros((3,))
-desired=np.zeros((3,))
-actual=np.zeros((3,))
-for i in range(0,3):
- x[i]=float(input("Initial Inputs:"))
-for i in range(0,3):
- weights[i]=float(input("Initial Weights:"))
-for i in range(0,3):
- desired[i]=float(input("Desired Weights:"))
-for i in range(0,3):
- actual=x[i]*weights
-print("actual",actual)
-print("desired",desired)
-a=float(input("Enter Learning Rate:"))
-while True:
- if np.array_equal(desired,actual):
-     break #no change
- else:
-     for i in range(0,3):
-         weights[i]=weights[i]+a*(desired[i]-actual[i])
-         actual=x[i]*weights
-         print("Weights",weights)
-         print("Actual",actual)
-         print("desired",desired)
-print("FINAL OUTPUT")
-print("Corrected Weights",weights)
-print("Actual",actual)
-print("desired",desired)
-    
+var text2 = `
+1(CheckingPrereqisites)
+dotnet
+dotnet --info
+dotnet new webapi -o Glossary(cretaing core rest api)
+(This command creates a folder named Glossary and generates inside it the content for the 
+ASP.NET project from the webapi template.)
+(Running the sample project)
+cd Glossary
+dotnet add package Swashbuckle.AspNetCore -s https://api.nuget.org/v3/index.json
+dotnet run
+(Point your browser to the address https://localhost:5001/weatherforecast)
+curl --insecure https://localhost:5001/weatherforecast (press Ctrl+C to stop the microservice)
 
+(Setting up a CRUD API:)
+To get started, remove the WeatherForecast.cs file from the root of the project and the
+WeatherForecastController.cs file from the Controllers folder.
+(Creating the model.)
+Go to Glossary folder → Right click → New → Text Document
+Code:
+//GlossaryItem.cs
+namespace Glossary
+{
+public class GlossaryItem
+{
+public string Term { get; set; }
+public string Definition { get; set; }
+}
+}
+
+Creating the controller:
+Now, you need to create the API controller to handle HTTP requests. Create the
+GlossaryController.cs in the Controllers folder and put the code inside it.
+Go to Controllers folder →Right click → New → Text Document
+Code:
+
+//Controllers/GlossaryController.cs
+using System;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
+using System.IO;
+namespace Glossary.Controllers
+{
+[ApiController]
+[Route("api/[controller]")]
+public class GlossaryController: ControllerBase
+{
+private static List<GlossaryItem> Glossary = new List<GlossaryItem> {
+new GlossaryItem
+{
+Term= "HTML",
+Definition = "Hypertext Markup Language"
+},
+new GlossaryItem
+{
+Term= "MVC",
+
+Definition = "Model View Controller"
+},
+new GlossaryItem
+{
+Term= "OpenID",
+Definition = "An open standard for authentication."
+}
+};
+//Getting a List of Items
+[HttpGet]
+public ActionResult<List<GlossaryItem>> Get()
+{
+return Ok(Glossary);
+}
+//Getting a Single Item
+[HttpGet]
+[Route("{term}")]
+public ActionResult<GlossaryItem> Get(string term)
+{
+var glossaryItem = Glossary.Find(item =>
+item.Term.Equals(term, StringComparison.InvariantCultureIgnoreCase));
+if (glossaryItem == null)
+{
+return NotFound();
+} else
+{
+return Ok(glossaryItem);
+}
+//This method checks if the requested term exists in the Glossary list and returns the
+glossary item.
+}
+//Creating a New Item
+[HttpPost]
+public ActionResult Post(GlossaryItem glossaryItem)
+{
+var existingGlossaryItem = Glossary.Find(item =>
+item.Term.Equals(glossaryItem.Term,
+StringComparison.InvariantCultureIgnoreCase));
+if (existingGlossaryItem != null)
+{
+return Conflict("Cannot create the term because it already exists.");
+}
+else
+{
+
+Glossary.Add(glossaryItem);
+var resourceUrl = Path.Combine(Request.Path.ToString(),
+Uri.EscapeUriString(glossaryItem.Term));
+return Created(resourceUrl, glossaryItem);
+}
+}
+//Updating an Item
+[HttpPut]
+public ActionResult Put(GlossaryItem glossaryItem)
+{
+var existingGlossaryItem = Glossary.Find(item =>
+item.Term.Equals(glossaryItem.Term,
+StringComparison.InvariantCultureIgnoreCase));
+if (existingGlossaryItem == null)
+{
+return NotFound("Cannot update a non existing term.");
+} else
+{
+existingGlossaryItem.Definition = glossaryItem.Definition;
+return Ok();
+}
+}
+//Deleting an Item
+[HttpDelete]
+[Route("{term}")]
+public ActionResult Delete(string term)
+{
+var glossaryItem = Glossary.Find(item =>
+item.Term.Equals(term, StringComparison.InvariantCultureIgnoreCase));
+if (glossaryItem == null)
+{
+return NotFound();
+}
+else
+{
+Glossary.Remove(glossaryItem);
+return NoContent();
+}
+}
+}
+}
+dotnet run
+
+(testing crud funct of glosssary api)
+curl --insecure https://localhost:5001/api/glossary
+curl --insecure https://localhost:5001/api/glossary/MVC
+curl --insecure https://localhost:5001/api/glossary/HTML
+curl --insecure https://localhost:5001/api/glossary/OpenID
+curl --insecure -X POST -d “{\”term\”:\”MFA\”,\”definition\”:\”An authentication process.\”}” -H “Content-Type:application/json” https://localhost:5001/api/glossary
+curl --insecure https://localhosst:5001/api/glossary
+curl --insecure -X PUT -d "{\"term\": \"MVC\", \"definition\":\"Modified record of Model View Controller.\"}" -H "Content-Type:application/json" https://localhost:5001/api/glossary
+curl --insecure https://localhost:5001/api/glossary/MVC
+curl --insecure -X PUT -d "{\"term\": \"MVP\", \"definition\":\"Modified record of Model View Controller.\"}" -H "Content-Type:application/json" https://localhost:5001/api/glossary
+curl --insecure --request DELETE --url https://localhost:5001/api/glossary/openid
+curl --insecure --request DELETE --url https://localhost:5001/api/glossary/janita
+
+`;
+
+var text3 = `
+1(Overviewof Docker : https://labs.play-with-docker.com/): 
+docker
+docer version
+2(BuildImagewithInbuilt)
+docker images
+docker pull rocker/versedo
+docker images
+3(Crete repo in dockerhub)
+docker login --username=guptaroshni2505(login)
+docker tag 5ac23be2bb6c guptaroshni2505/07_rg(tag an imageid into repo)
+docker push guptaroshni2505/07_rg(pushtheimage)
+docker images(list of images)
+4(DockerImage with DockerFile)
+cat > Dockerfile<<EOF
+FROM busybox
+CMD echo “Hello Everyone! This is Roshni’s first Docker Image.”
+EOF(create a dockrfile)
+docker build -t guptaroshni2505/07_rg .(build dockerimage)
+docker push guptaroshni2505/07_rg(push image to repo)
+docker run guptaroshni2505/07_rg(run and close the docker session)
+`;
+
+var text4 = `
+A(install S/W pckg on docker): https://labs.play-with-docker.com/
+Enable hyper-V & restart the system, launch docker-desk-appl, run winds cmd as administrator
+docker run ubuntu bash -c “apt-get -y update”
+docker run ubuntu bash -c “apt-get -y install nginx”
+docker ps -l
+B(wrking with docker olumes & nw theory)
+docker pull nginx
+docker run -it --name=webApp -d -p 80:80 nginx (Click on port80 to check)
+docker ps (list the running containers)
+docker exec -it webApp bash (this command to execute bash shell)
+cd /usr/share/nginx/html (to go inside html folder)
+echo “Hello ROSHNI”>index.html (to change content of index file
+exit
+docker ps(now refresh on por80)
+docker stop webApp
+docker run -it - -name=webApp1 -d -p 80:80 nginx(refresh to port80)
+docker volume create MyVolume
+docker volume ls
+docker volume inspect MyVolume
+docker run -d - - name=webApp4 - -mount source=MyVolume, destination=/usr/share/nginx/html -p 80:80 nginx
+(Note: Incase if you get error, change port number to 81 i.e: 81:80 in the command)
+ls /
+cd /var/lib/docker
+ls
+cd volumes
+ls
+cd MyVolume
+ls
+cd _data
+ls
+echo “from MyVolume hello ROSHNI” >index.html(now refresh port 81)
+docker stop webApp4
+docker run -d - -name=webApp6 - -mount source=MyVolume,destination=/usr/share/nginx/html -p 81:80 nginx
+(19.	Click on port 81 and refresh the page you should get edited file as output.)
+`;
+
+var text5 = `
+docker play-lab:
+docker swarm init --advertise-addr <MANAGER-IP>(tocreate new swarm)
+docker swarm init --advertise-addr 192.168.99.100
+docker info(current state of the swarm)
+docker node ls(info about nodes)
+(add nodes to the swarm)
+docker swarm join-token worker
+docker node ls
+(deploy a service to th swarm)
+docker service create --replicas 1 --name helloworld alpine ping docker.com
+docker service ls
+(Inspect a service)
+docker service inspect --pretty helloworld
+docker service ps helloworld
+docker ps
+(Scale the service in swarm)
+docker service scale helloworld=5
+docker service ps helloworld
+docker ps
+(delete the service running on the swarm)
+docker service rm helloworld
+docker service inspect helloworld
+docker ps
+`;
+
+var text6 = `
+1.	Creating a GitHub repository: Login into your github account, navigate to github and create a new repository.
+2.	Setting up CircleCI: by logging up with your GitHub account.
+Navigate to project page, you will be taken to the Projects dashboard. On the dashboard, select the project you want to set up (Hello_World) and click Set Up Project.
+Select the option to commit a starter CI pipeline to a new branch, and click Set Up Project.
+This will create a file .circleci/config.yml at the root of your repository on a new branch called circleci-project-setup.
+Select Faster and Setup the project:
+You will have your first green build. If you are happy with this configuration, you can merge it into your main branch later.
+3.	Digging into your first pipeline.
+Click on the say-hello-workflow button on your pipeline to investigate the following parts of the run:
+Within this workflow, the pipeline ran one job, called say-hello. Click say-hello.
+You can see the steps present in the job, click on them to view their functionality:
+a.	Spin up environment:
+b.	Preparing environment variables:
+c.	Checkout code:
+d.	Say hello:
+e.	Breaking your build!
+Let’s get a bit more complex. Let’s edit our .circleci/config.yml file now.
+i.	Navigate to your project by clicking on the job say-hello(1), it will launch the following page, click on the circle-project-setup link present under Branch/Commit.
+ii.	Now click on the Edit Config tab, following page of config.yml will get launched. 
+iii.	Now you can see the config.yml code file.
+iv.	Replace the text as shown below: You can change printing statement by any random text.
+v.	Save and Run, it will launch following prompt, click on Commit Changes.
+vi.	Wait till the process gets completed.
+vii.	Once process get completed you can see the following
+window: Click on say-hello, it will fetch another window tab.
+viii.	Click on Hello_World project to view jobs.
+Now, notice that you have two jobs present under your project.
+ix.	Check the tests of both jobs.
+Click on say-hello 1 to view steps.
+Check the functionality test done under say hello.
+x.	Click on say-hello 2 to view steps.
+Check the functionality test done under Say hello.
 `;
 
 var text7 = `
-import numpy as np
-import decimal
-import math
-np.set_printoptions(precision=4)
-v1=np.array([0.6,-0.3])
-v2=np.array([-0.1,0.4])
-w=np.array([-0.2,0.4,0.1])
-b=np.array([0.3,0.5])
-x=np.array([0,1])
-alpha=0.25
-zin=[]
-print("calculate net input to z layer")
-for i in range (0,2):
- zin.append(round(b[i]+
- x[0]*v1[i]+x[1]*v2[i],4))
-print("zin=",zin)
-z=[]
-print("Apply activation function to calculate output")
-for i in range(0,2):
- z.append(round(1/(1+math.exp(-zin[i])),4))
-print("z=",z)
-print("calculate net input to output layer")
-yin=w[0]+z[0]*w[1]+z[1]*w[2]
-print("yin=",yin)
-print("calculate net output")
-y=round(1/(1+math.exp(-yin)),4)
-print("y=",y)
-fyin=y*(1-y)
-dk=round((1-y)*fyin,4)
-print("dk",dk)
-dw1=alpha*dk*z[0]
-dw2=alpha*dk*z[1]
-dw0=alpha*dk
-print("compute error portion in delta")
-din=[]
-for i in range(1,3):
- din.append(dk*w[i])
-print("din=",din)
-fzin=[]
-d=[]
-print("error in delta")
-for i in range(0,2):
- fzin.append(round(z[i]*(1-z[i]),4))
- d.append(round(din[i]*fzin[i],4))
-print("fzin=",fzin)
-print("d=",d)
-dv=[[0,0],[0,0],[0,0]]
-print("change in weights between input and hidden layer")
-for i in range(0,3):
- for j in range(0,2):
-     if i<=1:
-         dv[i][j]=alpha*d[j]*x[i]
- else:
-     dv[i][j]=alpha*d[j]
-print(dv)
-print("Final weights of network")
-for i in range(0,2):
- v1[i]=v1[i]+dv[0][i]
-print("v1=",v1)
-for i in range(0,2):
- v2[i]=v2[i]+dv[1][i]
-print("v2=",v2)
-for i in range(0,2):
- b[i]=b[i]+dv[1][i]
-print("b=",b)
-w[1]=w[1]+dw1
-w[2]=w[2]+dw2
-w[0]=w[0]+dw0
-print("w=",w)
-
-
+minikube version
+minikube start
+kubectl version
+kubectl cluster-info
+kubectl get nodes
+kubectl create deployment kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1
+kubectl get deployments
+View:
+2nd terminal:
+echo -e "\n\n\n\e[92mStarting Proxy. After starting it will not output a response. Please click the first Terminal Tab\n"; 
+kubectl proxy
+1st terminal:
+curl http://localhost:8001/version 
+export POD_NAME=$(kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}') 
+echo Name of the Pod: $POD_NAME
+curl http://localhost:8001/api/v1/namespaces/default/pods/$POD_NAME/ 
+explore:
+kubectl get pods
+kubectl describe pods
+kubectl expose deployment/kubernetes-bootcamp --type="NodePort" --port 8080
+kubectl get services
+new term:
+echo -e "\n\n\n\e[92mStarting Proxy. After starting it will not output a response. Please click the first Terminal Tab\n"; 
+kubectl proxy
+1st
+export POD_NAME=$(kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}') 
+echo Name of the Pod: $POD_NAME  
+curl http://localhost:8001/api/v1/namespaces/default/pods/$POD_NAME/proxy/ 
+kubectl logs $POD_NAME 
+kubectl exec $POD_NAME -- env
+kubectl exec -ti $POD_NAME -- bash 
+cat server.js 
+curl localhost:8080
+exit 
+new service:
+kubectl get pods 
+ kubectl get services 
+kubectl expose deployment/kubernetes-bootcamp --type="NodePort" --port 8080 
+ kubectl get services 
+kubectl describe services/kubernetes-bootcamp 
+ export NODE_PORT=$(kubectl get services/kubernetes-bootcamp -o go- template='{{(index .spec.ports 0).nodePort}}') 
+echo NODE_PORT=$NODE_PORT 
+ curl $(minikube ip):$NODE_PORT 
+kubectl describe deployment 
+kubectl get pods -l app=kubernetes-bootcamp 
+ kubectl get services -l app=kubernetes-bootcamp
+export POD_NAME=$(kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}') 
+echo Name of the Pod: $POD_NAME 
+ kubectl label pods $POD_NAME version=v1 
+kubectl describe pods $POD_NAME 
+ kubectl get pods -l version=v1 
+deleting:
+  kubectl delete service -l app=kubernetes-bootcamp
+kubectl get services 
+curl $(minikube ip):$NODE_PORT 
+kubectl exec -ti $POD_NAME -- curl localhost:8080 
 
 `;
 
-var text8= `
-import numpy as np
-import matplotlib.pyplot as plt
-fig, ax = plt.subplots()
-xmin, xmax = -0.2, 1.4
-ymin, ymax = -0.1, 1.1
-X = np.arange(xmin, xmax, 0.1)
-ax.scatter(0, 0, color="r")
-ax.scatter(0, 1, color="r")
-ax.scatter(1, 0, color="r")
-ax.scatter(1, 1, color="g")
-ax.set_xlim([xmin, xmax])
-ax.set_ylim([ymin, ymax])
-m, c = -1, 1.2
-ax.plot(X, m * X + c)
-plt.show()
-
-`;
-var text9= `
-disp("Practical Performed by: Roshni Gupta , Roll No : 09")
-function [yin, y]=net(j, w, x, temp, theta, yin, y)
- yin=yin
- y=y
- for i=1:4
- temp=temp+(y(i)*w(i,j));
- end
- yin(j)=x1(j)+temp;
- if(yin(j)>theta)
- y(j)=1;
- elseif(yin(j)==theta)
- y(j)=yin(j);
- else
- y(j)=-1
- end
- disp(yin)
- disp(y)
-endfunction
-disp("Discreate Hopfield Network");
-theta=0;
-x=[1 1 1 -1]
-w=x'*x
-disp("Weight matrix with self connection")
-disp(w);
-for i=1:4
-for j=1:4
- if(i==j)
- w(i,j)=0
- end
-end
-end
-disp("Weight matrix with no self connection");
-disp(w);
-disp("Given input pattern for testing");
-x1=[1 1 1 -1]
-y=[1 1 1 -1]
-temp=0;
-disp("By asynchronous updation method");
-disp("The net input calculated is :");
-yin=[0 0 0 0]
-[yin,y]= net(1,w,temp,theta,yin,y)
-[yin,y]= net(4,w,temp,theta,yin,y)
-[yin,y]= net(3,w,temp,theta,yin,y)
-[yin,y]= net(2,w,temp,theta,yin,y)
-disp("The output calculated from net input is :")
-disp (y)
-
-
-`;
-
-var text10= `
-disp("Practical Performed by: Roshni Gupta , Roll No : 09")
-clear all;
-disp('Kohonen self organizing feature maps');
-disp('The input patterns are')
-x=[0 0 1 1; 1 0 0 0; 0 1 1 0; 0 0 0 1]
-alpha=0.5;
-disp('Since we have 4 input pattern and cluster unit to be formed is 2, the weight matrix is');
-w=[0.2 0.9;0.4 0.7; 0.6 0.5; 0.8 0.3]
-disp('The Learning rate of this epoch is');
-alpha
-i=1;
-j=1;
-k=1;
-m=1;
-while(k<=4)
-for j=1:2
- temp=0;
- for i=1:4
- temp=temp + ((w(i,j)-x(k,i))^ 2);
- end
- D(j)=temp
-end
-if(D(1)<D(2))
- J=1;
-else
- J=2
-end
-disp('The winning unit is');
-disp(J)
-disp('Weight updation');
-for m=1:4
- w(m,J)=w(m,J)+(alpha*(x(k,m)-w(m,J)));
- end
-disp(w)
-k=k+1;
-disp(k)
-end
-
-
-`;
-
-var text11= `
-clear all;
-disp('Name: Roshni Gupta, Roll no.: 09');
-disp('Adaptive Resonance Theory Network 1');
-L=2;
-m=3;
-n=4;
-rho=0.4;
-te=L/(L-1+n);
-te=te/2;
-b=[te te te;te te te;te te te;te te te];
-t=ones(3,4);
-s=[1 1 0 0;0 0 0 1;1 0 0 0;0 0 1 1];
-e=1
-while(e<=4)
- temp=0;
- for i=1:4
- temp=temp+s(e,i);
- end
- ns=temp;
- x(e,:)=s(e,:);
- for i=1:3
- temp=0;
- for j=1:4
- temp=temp+(x(e,j)*b(j,i));
- end
- yin(i)=temp;
- end
- j=1;
- if (yin(j)>=yin(j+1)& yin(j)>= yin(j+2)) then
- J=1;
- elseif (yin(j+1)>= yin(j) & yin(j+1)>=yin(j+2))
-j=2;
- else
- J=3;
- end
- disp("J=");
- disp(J);
- for i=1:4
- x1(i)=x(e,i)*t(J,i);
- end
- x1;
- temp=0;
- for i=1:4
- temp=temp+x1(i);
- end
- nx=temp;
- m=nx/ns;
- if(m<rho)
- yin(J)=-1
- j=1;
- if (yin(j)>=yin(j+1)& yin(j)>= yin(j+2)) then
- J=1;
- elseif (yin(j+1)>= yin(j) & yin(j+1)>=yin(j+2))
- J=2;
- else
- J=3;
- end
-end
-for i=1:4
- temp=0;
- temp=L-1+nx;
- b(i,J)=(L*x1(i))/temp;
-end
-disp("b=");
-disp(b)
-for i=1:4
- t(J,i)=x1(i);
-end
-disp("t=");
-disp(t)
-e=e+1;
-end
-`;
-
-
-var text12= `
-print("Practical No 7A: Membership and Identity Operators (in, not in)")
-def overlapping(list1, list2):
-    for i in range(0, len(list1)):
-        for j in range(0, len(list2)):
-            if list1[i] == list2[j]:
-                return 1
-    return 0 
-list1 = [2, 3, 4, 5]
-list2 = [6, 7, 8, 9]
-if overlapping(list1, list2):
-    print("Overlapping elements found.")
-else:
-    print("No overlapping elements.")
-
-`;
-
-var text13= `
-print("Practical No 7B :Membership and identity Operators is,not is")
-print("Practical perform by Roll No :09,Roshni Gupta")
-print("Use of 'is' identity operator")
-x=5
-if(type(x) is int):
- 	print("True")
-else:
- print("False")
-# Python program to illustrate the use of 'is not' identity operator
-print("\n \n use of 'is not' identity operator")
-x=5.2
-if(type(x) is not int):
- 	print("True")
-else:
- 	print("False")
-
-`;
-
-var text14= `
-import fuzzywuzzy
-from fuzzywuzzy import fuzz
-print("Practical perform by Roll No :09,Roshni Gupta")
-Str_A ='Fuzzywuzzy is a lifesaver!'
-Str_B ='fuzzy wuzzy is a LIFE SAVER.'
-ratio = fuzz.ratio(Str_A.lower(), Str_B.lower())
-print('Similariy score: {}' .format(ratio))
-Str_A ='Chicago Illinois'
-Str_B ='chicago'
-ratio = fuzz.partial_ratio(Str_A.lower(), Str_B.lower())
-print('partial_ratio: {}' .format(ratio))
-Str_A ='Gunner William kline'
-Str_B ='Kline, Gunner William'
-ratio = fuzz.token_sort_ratio(Str_A, Str_B)
-print('token_sort_ratio: {}' .format(ratio))
-Str_A ='The 300 meter steepliechase winner, Soufiane E1 Bakkali'
-Str_B ='Soufiane E1 Bakkali'
-ratio = fuzz.token_set_ratio(Str_A, Str_B)
-print('token_set_ratio: {}' .format(ratio))
-
-`;
-var text15= `
-import numpy as np
-import skfuzzy as fuzz
-from skfuzzy import control as ctrl
-quality = ctrl.Antecedent(np.arange(0,11,1),'quality')
-service = ctrl.Antecedent(np.arange(0,11,1),'service')
-tip = ctrl.Consequent(np.arange(0,26,1),'tip')
-#Auto-membership function population is possible with .automf(3,5 or 7)
-quality.automf(3)
-service.automf(3)
-#Custom membership functions can be built interactively with a familiar,
-#pythonic API
-tip['low'] = fuzz.trimf(tip.universe, [0,0,13])
-tip['medium'] = fuzz.trimf(tip.universe,[0,13,25])
-tip['high']= fuzz.trimf(tip.universe,[13,25,25])
-quality.view()
-service.view()
-tip.view()
-rule1 = ctrl.Rule(quality['poor'] | service['poor'], tip['low'])
-rule2 = ctrl.Rule(service['average'], tip['medium'])
-rule3 = ctrl.Rule(service['good'] | quality['good'], tip['high'])
-rule1.view()
-#defined rules, we can simply create a control system via
-tipping_ctrl = ctrl.ControlSystem([rule1, rule2, rule3])
-tipping = ctrl.ControlSystemSimulation(tipping_ctrl)
-# Pass inputs to the ControlSystem using Antecedent labels with Pythonic API
-# Note: if you like passing many inputs all at once, use .inputs(dict_of_data)
-tipping.input['quality'] = 6.5
-tipping.input['service'] = 9.8
-# Crunch the numbers
-tipping.compute()
-tip.view(sim=tipping)
-
-`;
-function copyText(text) {
-    navigator.clipboard.writeText(text).then(function () {
-        document.getElementById('copiedMsg').innerHTML = "Text Copied"
-    }).catch(function (err) {
-        console.error('Unable to copy text', err);
-    });
+var text8 = `
+Product.cs:
+namespace MaPract8.Models
+{
+    public class Product
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public decimal Price { get; set; }
+        public int CategoryId { get; set; }
+    }
 }
-</script>
+Category.cs:
+namespace MaPract8.Models
+{
+    public class Category
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+    }
+}
+ProductContext.cs:
+using Microsoft.EntityFrameworkCore;
+using MaPract8.Models;
+
+namespace MaPract8.DBContexts
+{
+    public class ProductContext : DbContext
+    {
+        public ProductContext(DbContextOptions<ProductContext> options) : base(options) { }
+
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categories { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Category>().HasData(
+                new Category { Id = 1, Name = "Electronics", Description = "Electronic Items" },
+                new Category { Id = 2, Name = "Clothes", Description = "Dresses" },
+                new Category { Id = 3, Name = "Grocery", Description = "Grocery Items" }
+            );
+        }
+    }
+}
+ProductRepositor.cs:
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using MaPract8.DBContexts;
+using MaPract8.Models;
+
+namespace MaPract8.Repository
+{
+    public class ProductRepository : IProductRepository
+    {
+        private readonly ProductContext _dbContext;
+
+        public ProductRepository(ProductContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
+        public IEnumerable<Product> GetProducts() => _dbContext.Products.ToList();
+
+        public Product GetProductByID(int productId) => _dbContext.Products.Find(productId);
+
+        public void InsertProduct(Product product)
+        {
+            _dbContext.Add(product);
+            Save();
+        }
+
+        public void DeleteProduct(int productId)
+        {
+            var product = _dbContext.Products.Find(productId);
+            _dbContext.Products.Remove(product);
+            Save();
+        }
+
+        public void UpdateProduct(Product product)
+        {
+            _dbContext.Entry(product).State = EntityState.Modified;
+            Save();
+        }
+
+        public void Save() => _dbContext.SaveChanges();
+    }
+}
+
+ProductController.cs:
+using Microsoft.AspNetCore.Mvc;
+using MaPract8.Models;
+using MaPract8.Repository;
+using System.Collections.Generic;
+using System.Transactions;
+
+namespace MaPract8.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ProductController : ControllerBase
+    {
+        private readonly IProductRepository _productRepository;
+
+        public ProductController(IProductRepository productRepository)
+        {
+            _productRepository = productRepository;
+        }
+
+        [HttpGet]
+        public IActionResult Get() => Ok(_productRepository.GetProducts());
+
+        [HttpGet("{id}")]
+        public IActionResult Get(int id) => Ok(_productRepository.GetProductByID(id));
+
+        [HttpPost]
+        public IActionResult Post([FromBody] Product product)
+        {
+            using var scope = new TransactionScope();
+            _productRepository.InsertProduct(product);
+            scope.Complete();
+            return CreatedAtAction(nameof(Get), new { id = product.Id }, product);
+        }
+
+        [HttpPut]
+        public IActionResult Put([FromBody] Product product)
+        {
+            if (product == null) return NoContent();
+            using var scope = new TransactionScope();
+            _productRepository.UpdateProduct(product);
+            scope.Complete();
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _productRepository.DeleteProduct(id);
+            return Ok();
+        }
+    }
+}
+
+startup.cs:
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
+using MaPract8.DBContexts;
+using MaPract8.Repository;
+
+namespace MaPract8
+{
+    public class Startup
+    {
+        public Startup(IConfiguration configuration) { Configuration = configuration; }
+
+        public IConfiguration Configuration { get; }
+
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddDbContext<ProductContext>(o => o.UseSqlServer(Configuration.GetConnectionString("productdb")));
+            services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddControllers();
+        }
+
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
+            app.UseRouting();
+            app.UseAuthorization();
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+        }
+    }
+}
+appsettings.json (Database Connection):
+{
+  "ConnectionStrings": {
+    "productdb": "Server=YourServerName;Database=productsdb;Trusted_Connection=True;"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "AllowedHosts": "*"
+}
+
+`;
+
+        function copyText(text, name) {
+            navigator.clipboard.writeText(text).then(function () {
+                document.getElementById('copiedMsg').innerHTML = `Copied: ${name}`;
+            }).catch(function (err) {
+                console.error('Unable to copy text', err);
+            });
+        }
+    </script>
 
 </body>
-
 </html>
