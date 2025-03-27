@@ -1114,54 +1114,164 @@ R4#trace 6.6.6.6
 
 var text9 = `
 r1:
-en
-conf t
+enable
+configure terminal
 hostname R1
 
 ! Configure Serial Interfaces
 interface Serial2/0
-ip address 20.0.0.1 255.0.0.0
+ip address 10.0.0.1 255.255.255.0
 no shutdown
 exit
 
 interface Serial2/1
-ip address 10.0.0.2 255.0.0.0
+ip address 10.0.1.1 255.255.255.0
 no shutdown
 exit
 
+! Configure Ethernet Interface for PC1
 interface FastEthernet0/0
-ip address 60.0.0.1 255.0.0.0
+ip address 192.168.1.1 255.255.255.0
 no shutdown
 exit
+exit
+write memory
 
-r2:
-en
-conf t
+R2:
+enable
+configure terminal
 hostname R2
 
-interface Serial2/1
-ip address 20.0.0.2 255.0.0.0
+! Configure Serial Interfaces
+interface Serial2/0
+ip address 10.0.0.2 255.255.255.0
 no shutdown
 exit
 
-R1(config)# ip route 0.0.0.0 0.0.0.0 10.0.0.2
-R3(config)# ip route 0.0.0.0 0.0.0.0 10.2.2.1
-R2(config)# ip route 192.168.1.0 255.255.255.0 10.1.1.1
-R2(config)# ip route 192.168.3.0 255.255.255.0 10.2.2.2
+interface Serial2/1
+ip address 10.0.2.1 255.255.255.0
+no shutdown
+exit
 
-R1# ping 192.168.3.1
-R2# ping 192.168.1.1
-R3# ping 20.0.0.1
+! Configure Ethernet Interface for PC2
+interface FastEthernet0/0
+ip address 192.168.2.1 255.255.255.0
+no shutdown
+exit
 
-R1# show ip route
-R2# show ip route
-R3# show ip route
+exit
+write memory
 
-pc1 r1:
+R3:
+enable
+configure terminal
+hostname R3
+
+! Configure Serial Interfaces
+interface Serial2/0
+ip address 10.0.1.2 255.255.255.0
+no shutdown
+exit
+
+interface Serial2/1
+ip address 10.0.3.1 255.255.255.0
+no shutdown
+exit
+
+! Configure Ethernet Interface for PC3
+interface FastEthernet0/0
+ip address 192.168.3.1 255.255.255.0
+no shutdown
+exit
+
+exit
+write memory
+
+R4:
+enable
+configure terminal
+hostname R4
+
+! Configure Serial Interfaces
+interface Serial2/0
+ip address 10.0.2.2 255.255.255.0
+no shutdown
+exit
+
+interface Serial2/1
+ip address 10.0.4.1 255.255.255.0
+no shutdown
+exit
+
+! Configure Ethernet Interface for PC4
+interface FastEthernet0/0
+ip address 192.168.4.1 255.255.255.0
+no shutdown
+exit
+
+exit
+write memory
+
+R5:
+enable
+configure terminal
+hostname R5
+
+! Configure Serial Interface
+interface Serial2/0
+ip address 10.0.3.2 255.255.255.0
+no shutdown
+exit
+
+interface Serial2/1
+ip address 10.0.4.2 255.255.255.0
+no shutdown
+exit
+
+! Configure Ethernet Interface for PC5
+interface FastEthernet0/0
+ip address 192.168.5.1 255.255.255.0
+no shutdown
+exit
+
+exit
+write memory
+
+R1:
+ip route 192.168.2.0 255.255.255.0 10.0.0.2
+ip route 192.168.3.0 255.255.255.0 10.0.1.2
+ip route 192.168.4.0 255.255.255.0 10.0.0.2
+ip route 192.168.5.0 255.255.255.0 10.0.1.2
+
+r2:
+ip route 192.168.1.0 255.255.255.0 10.0.0.1
+ip route 192.168.3.0 255.255.255.0 10.0.2.2
+ip route 192.168.4.0 255.255.255.0 10.0.2.2
+ip route 192.168.5.0 255.255.255.0 10.0.2.2
+
+r3:
+ip route 192.168.1.0 255.255.255.0 10.0.1.1
+ip route 192.168.2.0 255.255.255.0 10.0.2.1
+ip route 192.168.4.0 255.255.255.0 10.0.3.2
+ip route 192.168.5.0 255.255.255.0 10.0.3.2
+
+r4:
+ip route 192.168.1.0 255.255.255.0 10.0.2.1
+ip route 192.168.2.0 255.255.255.0 10.0.2.1
+ip route 192.168.3.0 255.255.255.0 10.0.3.1
+ip route 192.168.5.0 255.255.255.0 10.0.4.2
+
+r5:
+ip route 192.168.1.0 255.255.255.0 10.0.3.1
+ip route 192.168.2.0 255.255.255.0 10.0.4.1
+ip route 192.168.3.0 255.255.255.0 10.0.3.1
+ip route 192.168.4.0 255.255.255.0 10.0.4.1
+
+r1 pc1:
 ip address 192.168.1.100 255.255.255.0
 gateway 192.168.1.1
 
-pc2 r2:
+r2 pc2:
 ip address 192.168.2.100 255.255.255.0
 gateway 192.168.2.1
 
@@ -1169,17 +1279,13 @@ pc3 r3:
 ip address 192.168.3.100 255.255.255.0
 gateway 192.168.3.1
 
-pc1:
-ping 192.168.3.100  # Test connection to PC3
-ping 192.168.2.100  # Test connection to PC2
+pc4 r4:
+ip address 192.168.4.100 255.255.255.0
+gateway 192.168.4.1
 
-pc2:
-ping 192.168.1.100  # Test connection to PC1
-ping 192.168.3.100  # Test connection to PC3
-
-pc3:
-ping 192.168.1.100  # Test connection to PC1
-ping 192.168.2.100  # Test connection to PC2
+pc5 r5:
+ip address 192.168.5.100 255.255.255.0
+gateway 192.168.5.1
 
 `;
         function copyText(text, name) {
