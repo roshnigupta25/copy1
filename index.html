@@ -926,6 +926,14 @@ R4# traceroute 192.168.1.1 source 192.168.4.1
 `;
 
 var text7 = `
+pc1:
+ip address 192.168.1.2 255.255.255.0
+gateway 192.168.1.1
+
+pc2:
+ip address 192.168.2.2 255.255.255.0
+gateway 192.168.2.1
+
 sw1:
 en
 conf t
@@ -940,10 +948,6 @@ vlan 20
 name HR
 exit
 
-vlan 30
-name IT
-exit
-
 interface FastEthernet0/1
 switchport mode access
 switchport access vlan 10
@@ -953,34 +957,19 @@ interface FastEthernet0/2
 switchport mode access
 switchport access vlan 20
 exit
-
-interface FastEthernet0/3
-switchport mode access
-switchport access vlan 30
+int vlan10
+ip add 192.168.1.1 255.255.255.0
+no shutdown
 exit
-
-interface FastEthernet0/24
-switchport mode trunk
-switchport trunk encapsulation dot1q
+int vlan20
+ip add 192.168.2.1 255.255.255.0
+no shutdown
 exit
-show vlan brief
-
-pc1:
-ip address 192.168.10.2 255.255.255.0
-gateway 192.168.10.1
-
-pc2:
-ip address 192.168.20.2 255.255.255.0
-gateway 192.168.20.1
+exit
+show ip interface
 
 ping 192.168.20.2   # From PC1 to PC2
 ping 192.168.10.2   # From PC2 to PC1
-
-both: show vlan brief
-
-sw1:
-show ip interface brief
-show ip route
 
 `;
 
