@@ -30,854 +30,1169 @@
 
     <h2>Click to Copy Code Snippets</h2>
 
-    <button onclick="copyText(text1, 'MVC Code')">MVC</button>
-<button onclick="copyText(text2, 'RESTAPI')">corerestapi</button>
-<button onclick="copyText(text3, 'DImCon')">DImCon</button>
-<button onclick="copyText(text4, 'Vol&Netw')">Vol&Netw</button>
-<button onclick="copyText(text5, 'dockswarm')">Swarm</button>
-<button onclick="copyText(text6, 'CircleCI')">CircleCI</button>
-<button onclick="copyText(text7, 'Kubernetes')">kuber</button>
-<button onclick="copyText(text7, 'microservice')">MicAsp</button>
+    <button onclick="copyText(text1, 'IPSLAFeature')">IPSLA</button>
+<button onclick="copyText(text2, 'IPslaTrack&pathControl')">iptrackk&path</button>
+<button onclick="copyText(text3, 'As_path')">As_path</button>
+<button onclick="copyText(text4, 'IBGP,EBGP,Local,MED')">gplocamed</button>
+<button onclick="copyText(text5, 'secure&management')">Securmanagement</button>
+<button onclick="copyText(text6, 'PBR')">PBR</button>
+<button onclick="copyText(text7, 'VLAN')">VLAN</button>
+<button onclick="copyText(text8, 'MPLS')">MPLS</button>
+<button onclick="copyText(text9, 'Static')">Staticrouting</button>
+
 
     <p id="copiedMsg"></p>
 
     <script>
-        var text1 = `a. StudentModel.cs:
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.ComponentModel.DataAnnotations;
-namespace _34_MA_Practical1.Models
-{
-    public class StudentModel
-    {
-        [Required(ErrorMessage = "Student Roll Number is required.")]
-        public string RollNo { get; set; }
-        [Required(ErrorMessage = "Student First Name is required.")]
-        public string FirstName { get; set; }
-        [Required(ErrorMessage = "Student Last Name is required.")]
-        public string LastName { get; set; }
-        [Required(ErrorMessage = "Student Address is required.")]
-        public string Address { get; set; }
-        [Required(ErrorMessage = "Student Class is required.")]
-        public string Class { get; set; }
-        [Required(ErrorMessage = "Student Age is required.")]
-        public string Age { get; set; }
-        [Required(ErrorMessage = "Student Contact Number is required.")]
-        public string ContactNumber { get; set; }
-    }
-}
+        var text1 = `
+R1:
+en
+conf t
+hostname R1
 
-b. StudentController:
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using _34_MA_Practical1.Models;
+int Loopback0
+description R1 LAN
+ip address 192.168.1.1 255.255.255.0
 
-namespace _34_MA_Practical1.Controllers
-{
-    public class StudentController : Controller
-    {
-        public ActionResult Index()
-        {
-            return View();
-        }
-        public ActionResult Student()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult Student(StudentModel obj)
-        {
-            ViewBag.Txt1 = "Congratulations!!! You have been Registered Successfully!!!";
-            ViewBag.Txt2 = "Your Details are as follows:";
-            ViewBag.Txt3 = "Roll Number = " + obj.RollNo;
-            ViewBag.Txt4 = "Name = " + obj.FirstName + " " + obj.LastName;
-            ViewBag.Txt5 = "Class = " + obj.Class;
-            ViewBag.Txt6 = "Address = " + obj.Address;
-            ViewBag.Txt7 = "Age = " + obj.Age;
-            ViewBag.Txt8 = "Contact Number = " + obj.ContactNumber;
-            ViewBag.Txt9 = "Thank You! We'll Get Back to you soon.";
-            return View();
-        }
-    }
-}
+int se2/0
+description R1-->ISP1
+ip address 209.165.201.2 255.255.255.252
+clock rate 128000
+bandwidth 128
+no shutdown
 
-c. Index.cshtml:
-@{
-    ViewBag.Title = "Index";
-}
-<h2>Index</h2>
+int se2/1
+description R1-->ISP2
+ip address 209.165.202.130 255.255.255.252
+bandwidth 128
+no shutdown
+end
 
-d. Student.cshtml:
-@model _34_MA_Practical1.Models.StudentModel
-@{
-    ViewBag.Title = "Student";
-}
-<h2>Roshni Gupta's first ASP .Net MVC Application</h2>
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    <div class="form-horizontal">
-        <h4>Student Registration Form</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.RollNo, htmlAttributes: new
-            {
-                @class =
+R2:
+en
+conf t
+hostname ISP1
 
-            "control-label col-md-2"
-            })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.RollNo, new
-                {
-                    htmlAttributes = new
-                    {
+int Loopback0
+description Simulated Internet Web Server
+ip address 209.165.200.254 255.255.255.255
 
-                @class = "form-control"
-                    }
-                })
+int Loopback1
+description ISP1 DNS Server
+ip address 209.165.201.30 255.255.255.255
 
-                @Html.ValidationMessageFor(model => model.RollNo, "", new
-                {
-                    @class =
+int se2/0
+description ISP1-->R1
+ip address 209.165.201.1 255.255.255.252
+bandwidth 128
+no shutdown
 
-                "text-danger"
-                })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.FirstName, htmlAttributes: new
-            {
-                @class =
+int se2/1
+description ISP1-->ISP2
+ip address 209.165.200.225 255.255.255.252
+clock rate 128000
+bandwidth 128
+no shutdown
+end
 
-            "control-label col-md-2"
-            })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FirstName, new
-                {
-                    htmlAttributes = new
-                    {
+R3:
+en
+conf t
+hostname ISP2
 
-                @class = "form-control"
-                    }
-                })
+int Loopback0
+description Simulated Internet Web Server
+ip address 209.165.200.254 255.255.255.255
 
-                @Html.ValidationMessageFor(model => model.FirstName, "", new
-                {
-                    @class
+int Loopback1
+description ISP2 DNS Server
+ip address 209.165.202.158 255.255.255.255
 
-                = "text-danger"
-                })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.LastName, htmlAttributes: new
-            {
-                @class =
+int se2/0
+description ISP2-->R1
+ip address 209.165.202.129 255.255.255.252
+clock rate 128000
+bandwidth 128
+no shutdown
 
-            "control-label col-md-2"
-            })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LastName, new
-                {
-                    htmlAttributes = new
-                    {
+int se2/1
+description ISP2-->ISP1
+ip address 209.165.200.226 255.255.255.252
+bandwidth 128
+no shutdown
+end
 
-                @class = "form-control"
-                    }
-                })
+All: show interfaces description | include up
 
-                @Html.ValidationMessageFor(model => model.LastName, "", new
-                {
-                    @class =
+R1:ip route 0.0.0.0 0.0.0.0 209.165.201.1
+R2:
+config t
+router eigrp 1
+network 209.165.200.224 0.0.0.3
+network 209.165.201.0 0.0.0.31
+no auto-summary
+exit
+ip route 192.168.1.0 255.255.255.0 209.165.201.2
 
-                "text-danger"
-                })
-            </div>
-        </div>
-        <div class="form-group">
+R3:
+config t
+router eigrp 1
+network 209.165.200.224 0.0.0.3
+network 209.165.202.128 0.0.0.31
+no auto-summary
+exit
+ip route 192.168.1.0 255.255.255.0 209.165.202.130
 
-            @Html.LabelFor(model => model.Address, htmlAttributes: new
-            {
-                @class =
+Ping from R1:
+tclsh
+R1(tcl)# foreach address {
++>(tcl)# 209.165.200.254
++>(tcl)# 209.165.201.30
++>(tcl)# 209.165.202.158
++>(tcl)# } {
++>(tcl)# ping $address source 192.168.1.1
++>(tcl)# }
 
-            "control-label col-md-2"
-            })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Address, new
-                {
-                    htmlAttributes = new
-                    {
-
-                @class = "form-control"
-                    }
-                })
-
-                @Html.ValidationMessageFor(model => model.Address, "", new
-                {
-                    @class =
-
-                "text-danger"
-                })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Class, htmlAttributes: new
-            {
-                @class =
-
-            "control-label col-md-2"
-            })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Class, new
-                {
-                    htmlAttributes = new
-                    {
-
-                @class = "form-control"
-                    }
-                })
-
-                @Html.ValidationMessageFor(model => model.Class, "", new
-                {
-                    @class =
-
-                "text-danger"
-                })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Age, htmlAttributes: new
-            {
-                @class =
-
-            "control-label col-md-2"
-            })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Age, new
-                {
-                    htmlAttributes = new
-                    {
-
-                @class = "form-control"
-                    }
-                })
-
-                @Html.ValidationMessageFor(model => model.Age, "", new
-                {
-                    @class =
-
-                "text-danger"
-                })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.ContactNumber, htmlAttributes: new
-            {
-                @class
-
-            = "control-label col-md-2"
-            })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ContactNumber, new
-                {
-                    htmlAttributes =
-
-                new { @class = "form-control" }
-                })
-
-                @Html.ValidationMessageFor(model => model.ContactNumber, "", new
-                {
-
-                @class = "text-danger"
-                })
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-            <div class="col-md-offset-2 col-md-10 text-success">
-                <h3>@ViewBag.Txt1</h3>
-            </div>
-            <div class="col-md-offset-2 col-md-10">
-                <h4>@ViewBag.Txt2</h4>
-            </div>
-            <br>
-            <div class="col-md-offset-2 col-md-10">
-                @ViewBag.Txt3
-            </div>
-            <div class="col-md-offset-2 col-md-10">
-                @ViewBag.Txt4
-            </div>
-            <div class="col-md-offset-2 col-md-10">
-                @ViewBag.Txt5
-
-            </div>
-            <div class="col-md-offset-2 col-md-10">
-                @ViewBag.Txt6
-            </div>
-            <div class="col-md-offset-2 col-md-10">
-                @ViewBag.Txt7
-            </div>
-            <div class="col-md-offset-2 col-md-10">
-                @ViewBag.Txt8
-            </div>
-            <br>
-        </div>
-    </div>
-}
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-<s src="~/Scripts/jquery-3.4.1.min.js"></s>
-<s src="~/Scripts/jquery.validate.min.js"></s>
-<s src="~/Scripts/jquery.validate.unobtrusive.min.js"></s>
-
+R1(tcl)# foreach address {
++>(tcl)# 209.165.200.254
++>(tcl)# 209.165.201.30
++>(tcl)# 209.165.202.158
++>(tcl)# } {
++>(tcl)# traceroute $address source 192.168.1.1
++>(tcl)# }
 `;
 
 var text2 = `
-1(CheckingPrereqisites)
-dotnet
-dotnet --info
-dotnet new webapi -o Glossary(cretaing core rest api)
-(This command creates a folder named Glossary and generates inside it the content for the 
-ASP.NET project from the webapi template.)
-(Running the sample project)
-cd Glossary
-dotnet add package Swashbuckle.AspNetCore -s https://api.nuget.org/v3/index.json
-dotnet run
-(Point your browser to the address https://localhost:5001/weatherforecast)
-curl --insecure https://localhost:5001/weatherforecast (press Ctrl+C to stop the microservice)
+r1:
+en
+conf t
+hostname R1
 
-(Setting up a CRUD API:)
-To get started, remove the WeatherForecast.cs file from the root of the project and the
-WeatherForecastController.cs file from the Controllers folder.
-(Creating the model.)
-Go to Glossary folder → Right click → New → Text Document
-Code:
-//GlossaryItem.cs
-namespace Glossary
-{
-public class GlossaryItem
-{
-public string Term { get; set; }
-public string Definition { get; set; }
-}
-}
+int Loopback0
+description R1 LAN
+ip address 192.168.1.1 255.255.255.0
 
-Creating the controller:
-Now, you need to create the API controller to handle HTTP requests. Create the
-GlossaryController.cs in the Controllers folder and put the code inside it.
-Go to Controllers folder →Right click → New → Text Document
-Code:
+int se2/0
+description R1-->ISP1
+ip address 209.165.201.2 255.255.255.252
+clock rate 128000
+bandwidth 128
+no shutdown
 
-//Controllers/GlossaryController.cs
-using System;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using System.IO;
-namespace Glossary.Controllers
-{
-[ApiController]
-[Route("api/[controller]")]
-public class GlossaryController: ControllerBase
-{
-private static List<GlossaryItem> Glossary = new List<GlossaryItem> {
-new GlossaryItem
-{
-Term= "HTML",
-Definition = "Hypertext Markup Language"
-},
-new GlossaryItem
-{
-Term= "MVC",
+int se2/1
+description R1-->ISP2
+ip address 209.165.202.130 255.255.255.252
+bandwidth 128
+no shutdown
+end
 
-Definition = "Model View Controller"
-},
-new GlossaryItem
-{
-Term= "OpenID",
-Definition = "An open standard for authentication."
+Ping ISP1&iSp2:
+tclsh
+foreach address {
+  209.165.200.254
+  209.165.201.30
+  209.165.202.158
+} {
+  ping $address source 192.168.1.1
 }
-};
-//Getting a List of Items
-[HttpGet]
-public ActionResult<List<GlossaryItem>> Get()
-{
-return Ok(Glossary);
-}
-//Getting a Single Item
-[HttpGet]
-[Route("{term}")]
-public ActionResult<GlossaryItem> Get(string term)
-{
-var glossaryItem = Glossary.Find(item =>
-item.Term.Equals(term, StringComparison.InvariantCultureIgnoreCase));
-if (glossaryItem == null)
-{
-return NotFound();
-} else
-{
-return Ok(glossaryItem);
-}
-//This method checks if the requested term exists in the Glossary list and returns the
-glossary item.
-}
-//Creating a New Item
-[HttpPost]
-public ActionResult Post(GlossaryItem glossaryItem)
-{
-var existingGlossaryItem = Glossary.Find(item =>
-item.Term.Equals(glossaryItem.Term,
-StringComparison.InvariantCultureIgnoreCase));
-if (existingGlossaryItem != null)
-{
-return Conflict("Cannot create the term because it already exists.");
-}
-else
-{
+exit
 
-Glossary.Add(glossaryItem);
-var resourceUrl = Path.Combine(Request.Path.ToString(),
-Uri.EscapeUriString(glossaryItem.Term));
-return Created(resourceUrl, glossaryItem);
-}
-}
-//Updating an Item
-[HttpPut]
-public ActionResult Put(GlossaryItem glossaryItem)
-{
-var existingGlossaryItem = Glossary.Find(item =>
-item.Term.Equals(glossaryItem.Term,
-StringComparison.InvariantCultureIgnoreCase));
-if (existingGlossaryItem == null)
-{
-return NotFound("Cannot update a non existing term.");
-} else
-{
-existingGlossaryItem.Definition = glossaryItem.Definition;
-return Ok();
-}
-}
-//Deleting an Item
-[HttpDelete]
-[Route("{term}")]
-public ActionResult Delete(string term)
-{
-var glossaryItem = Glossary.Find(item =>
-item.Term.Equals(term, StringComparison.InvariantCultureIgnoreCase));
-if (glossaryItem == null)
-{
-return NotFound();
-}
-else
-{
-Glossary.Remove(glossaryItem);
-return NoContent();
-}
-}
-}
-}
-dotnet run
+R1# en
+config t
+ip sla 11
+icmp-echo 209.165.201.30
+frequency 10
+exit
+ip sla schedule 11 life forever start-time now
 
-(testing crud funct of glosssary api)
-curl --insecure https://localhost:5001/api/glossary
-curl --insecure https://localhost:5001/api/glossary/MVC
-curl --insecure https://localhost:5001/api/glossary/HTML
-curl --insecure https://localhost:5001/api/glossary/OpenID
-curl --insecure -X POST -d “{\”term\”:\”MFA\”,\”definition\”:\”An authentication process.\”}” -H “Content-Type:application/json” https://localhost:5001/api/glossary
-curl --insecure https://localhosst:5001/api/glossary
-curl --insecure -X PUT -d "{\"term\": \"MVC\", \"definition\":\"Modified record of Model View Controller.\"}" -H "Content-Type:application/json" https://localhost:5001/api/glossary
-curl --insecure https://localhost:5001/api/glossary/MVC
-curl --insecure -X PUT -d "{\"term\": \"MVP\", \"definition\":\"Modified record of Model View Controller.\"}" -H "Content-Type:application/json" https://localhost:5001/api/glossary
-curl --insecure --request DELETE --url https://localhost:5001/api/glossary/openid
-curl --insecure --request DELETE --url https://localhost:5001/api/glossary/janita
+r1#show ip sla configuration 11
+R1# show ip sla statistics
 
+R1# config t
+R1(config)# ip sla 22
+R1(config-ip-sla)# icmp-echo 209.165.202.158
+R1(config-ip-sla-echo)# frequency 10
+R1(config-ip-sla-echo)# exit
+R1(config)# ip sla schedule 22 life forever start-time now
+R1# show ip sla configuration 22
+R1# show ip sla statistics 22
+
+config t
+R1(config)# no ip route 0.0.0.0 0.0.0.0 209.165.201.1
+R1(config)# ip route 0.0.0.0 0.0.0.0 209.165.201.1 5
+R1(config)# exit
+
+R1# show ip route | begin Gateway
+
+R1(config)# track 1 ip sla 11 reachability
+R1(config-track)# delay down 10 up 1
+R1(config-track)# exit
+
+R1(config)# ip route 0.0.0.0 0.0.0.0 209.165.201.1 2 track 1
+
+R1(config)# track 2 ip sla 22 reachability
+R1(config-track)# delay down 10 up 1
+R1(config-track)# exit
+
+R1(config)# ip route 0.0.0.0 0.0.0.0 209.165.202.129 3 track 2
+R1# show ip route | begin Gateway
+
+ISP1# config t
+ISP1(config)# interface loopback 1
+ISP1(config-if)# shutdown
+
+R1# show ip route
+R1# show ip sla statistics
+R1# trace 209.165.200.254 source 192.168.1.1
+ISP1# no shutdown
+R1# show ip sla statistics
+R1# show ip route | begin Gateway
 `;
 
 var text3 = `
-1(Overviewof Docker : https://labs.play-with-docker.com/): 
-docker
-docer version
-2(BuildImagewithInbuilt)
-docker images
-docker pull rocker/versedo
-docker images
-3(Crete repo in dockerhub)
-docker login --username=guptaroshni2505(login)
-docker tag 5ac23be2bb6c guptaroshni2505/07_rg(tag an imageid into repo)
-docker push guptaroshni2505/07_rg(pushtheimage)
-docker images(list of images)
-4(DockerImage with DockerFile)
-cat > Dockerfile<<EOF
-FROM busybox
-CMD echo “Hello Everyone! This is Roshni’s first Docker Image.”
-EOF(create a dockrfile)
-docker build -t guptaroshni2505/07_rg .(build dockerimage)
-docker push guptaroshni2505/07_rg(push image to repo)
-docker run guptaroshni2505/07_rg(run and close the docker session)
+r1andher:
+en
+conf t
+hostname Andheri
+
+interface Loopback0
+ip address 10.1.1.1 255.255.255.0
+exit
+
+interface Serial2/0
+ip address 192.168.1.5 255.255.255.252
+no shutdown
+exit
+end
+
+r2 bandra:
+en
+conf t
+hostname Bandra
+
+interface Loopback0
+ip address 10.2.2.1 255.255.255.0
+exit
+
+interface Serial2/0
+ip address 192.168.1.6 255.255.255.252
+no shutdown
+exit
+
+interface Serial2/1
+ip address 172.24.1.17 255.255.255.252
+no shutdown
+exit
+end
+
+3 churchgate:
+en
+conf t
+hostname Churchgate
+
+interface Loopback0
+ip address 10.3.3.1 255.255.255.0
+exit
+
+interface Serial2/1
+ip address 172.24.1.18 255.255.255.252
+no shutdown
+exit
+end
+
+all:
+Andheri# show interfaces description | include up
+Bandra# show interfaces description | include up
+Churchgate# show interfaces description | include up
+B#ping 192.168.1.5
+
+Andheri# config t
+Andheri(config)# router bgp 100
+Andheri(config-router)# neighbor 192.168.1.6 remote-as 300
+Andheri(config-router)# network 10.1.1.0 mask 255.255.255.0
+
+Bandra# config t
+Bandra(config)# router bgp 300
+Bandra(config-router)# neighbor 192.168.1.5 remote-as 100
+Bandra(config-router)# neighbor 172.24.1.18 remote-as 65000
+Bandra(config-router)# network 10.2.2.0 mask 255.255.255.0
+
+Churchgate# config t
+Churchgate(config)# router bgp 65000
+Churchgate(config-router)# neighbor 172.24.1.17 remote-as 300
+Churchgate(config-router)# network 10.3.3.0 mask 255.255.255.0
+
+Bandra# show ip bgp neighbors
+Andheri# show ip route
+Andheri# ping 10.3.3.1 source 10.1.1.1
+Andheri# show ip bgp
+
+Bandra# config t
+Bandra(config)# ip as-path access-list 1 deny ^100$
+Bandra(config)# ip as-path access-list 1 permit .*
+Bandra(config)# router bgp 300
+Bandra(config-router)# neighbor 192.168.1.5 remove-private-as
+Bandra(config-router)# exit
+Bandra# clear ip bgp *
+
+Andheri# show ip route
+Bandra# show ip bgp regexp ^100$
+Bandra# tclsh
+foreach address {
+  10.1.1.1
+  10.2.2.1
+  10.3.3.1
+  192.168.1.5
+  192.168.1.6
+  172.24.1.17
+  172.24.1.18
+} {
+  ping $address
+}
+exit
 `;
 
 var text4 = `
-A(install S/W pckg on docker): https://labs.play-with-docker.com/
-Enable hyper-V & restart the system, launch docker-desk-appl, run winds cmd as administrator
-docker run ubuntu bash -c “apt-get -y update”
-docker run ubuntu bash -c “apt-get -y install nginx”
-docker ps -l
-B(wrking with docker olumes & nw theory)
-docker pull nginx
-docker run -it --name=webApp -d -p 80:80 nginx (Click on port80 to check)
-docker ps (list the running containers)
-docker exec -it webApp bash (this command to execute bash shell)
-cd /usr/share/nginx/html (to go inside html folder)
-echo “Hello ROSHNI”>index.html (to change content of index file
+r1 ISP:
+en
+conf t
+hostname ISP
+
+no ip domain-lookup  
+line con 0  
+logging synchronous  
+exec-timeout 0 0  
 exit
-docker ps(now refresh on por80)
-docker stop webApp
-docker run -it - -name=webApp1 -d -p 80:80 nginx(refresh to port80)
-docker volume create MyVolume
-docker volume ls
-docker volume inspect MyVolume
-docker run -d - - name=webApp4 - -mount source=MyVolume, destination=/usr/share/nginx/html -p 80:80 nginx
-(Note: Incase if you get error, change port number to 81 i.e: 81:80 in the command)
-ls /
-cd /var/lib/docker
-ls
-cd volumes
-ls
-cd MyVolume
-ls
-cd _data
-ls
-echo “from MyVolume hello ROSHNI” >index.html(now refresh port 81)
-docker stop webApp4
-docker run -d - -name=webApp6 - -mount source=MyVolume,destination=/usr/share/nginx/html -p 81:80 nginx
-(19.	Click on port 81 and refresh the page you should get edited file as output.)
+
+interface Loopback0
+description Dhiraj Pawar 100
+ip address 192.168.100.1 255.255.255.0
+exit
+
+interface se1/0
+ip address 192.168.1.5 255.255.255.252
+clock rate 128000
+no shutdown
+exit
+
+interface se1/1
+ip address 192.168.1.1 255.255.255.252
+no shutdown
+exit
+end
+
+r2 andheri:
+en
+conf t
+hostname Andheri
+
+no ip domain-lookup  
+line con 0  
+logging synchronous  
+exec-timeout 0 0  
+exit
+
+interface Loopback0
+ip address 172.16.64.1 255.255.255.0
+exit
+
+interface se1/0
+ip address 192.168.1.6 255.255.255.252
+no shutdown
+exit
+
+interface se1/1
+ip address 172.16.1.1 255.255.255.0
+clock rate 128000
+no shutdown
+exit
+end
+
+r3 borivali:
+en
+conf t
+hostname Borivali
+
+no ip domain-lookup  
+line con 0  
+logging synchronous  
+exec-timeout 0 0  
+exit
+
+interface Loopback0
+ip address 172.16.32.1 255.255.255.0
+exit
+
+interface se1/0
+ip address 192.168.1.2 255.255.255.252
+clock rate 128000
+no shutdown
+exit
+
+interface se1/1
+ip address 172.16.1.2 255.255.255.0
+no shutdown
+exit
+end
+
+ISP# ping 172.16.1.1
+Andheri# ping 172.16.1.2
+Andheri# ping 192.168.1.1
+
+andheri, borivali:
+config t
+router eigrp 1
+network 172.16.0.0
+exit
+
+andher:
+config t
+router bgp 64512
+neighbor 172.16.32.1 remote-as 64512
+neighbor 172.16.32.1 update-source lo0
+exit
+
+borivali:
+config t
+router bgp 64512
+neighbor 172.16.64.1 remote-as 64512
+neighbor 172.16.64.1 update-source lo0
+exit
+Borivali# show ip bgp neighbors
+
+isp:
+config t
+router bgp 200
+neighbor 192.168.1.6 remote-as 64512
+neighbor 192.168.1.2 remote-as 64512
+network 192.168.100.0
+exit
+
+Andheri(config)# ip route 172.16.0.0 255.255.0.0 null0
+
+borivali:
+config t
+router bgp 64512
+neighbor 192.168.1.1 remote-as 200
+network 172.16.0.0
+exit
+
+Andheri# show ip bgp neighbors
+Borivali# show ip bgp neighbors
+
+isp:
+config t
+router bgp 200
+network 192.168.1.0 mask 255.255.255.252
+network 192.168.1.4 mask 255.255.255.252
+exit
+ISP# show ip bgp
+
+andheri:
+config t
+router bgp 64512
+neighbor 172.16.32.1 next-hop-self
+exit
+
+borivali:
+config t
+router bgp 64512
+neighbor 172.16.64.1 next-hop-self
+exit
+
+Andheri# clear ip bgp *
+Borivali# clear ip bgp *
+
+andheri:
+config t
+route-map PRIMARY_T1_IN permit 10
+set local-preference 150
+exit
+router bgp 64512
+neighbor 192.168.1.5 route-map PRIMARY_T1_IN in
+exit
+
+borivali:
+config t
+route-map SECONDARY_T1_IN permit 10
+set local-preference 125
+exit
+router bgp 64512
+neighbor 192.168.1.1 route-map SECONDARY_T1_IN in
+exit
+
+Andheri# clear ip bgp * soft
+Borivali# clear ip bgp * soft
+Andheri# show ip bgp
+Borivali# show ip bgp
+
+andheri:
+config t
+route-map PRIMARY_T1_MED_OUT permit 10
+set metric 50
+exit
+router bgp 64512
+neighbor 192.168.1.5 route-map PRIMARY_T1_MED_OUT out
+exit
+
+borivali:
+config t
+route-map SECONDARY_T1_MED_OUT permit 10
+set metric 75
+exit
+router bgp 64512
+neighbor 192.168.1.1 route-map SECONDARY_T1_MED_OUT out
+exit
+
+Andheri# clear ip bgp * soft
+Borivali# clear ip bgp * soft
+
+isp:
+config t
+router bgp 200
+neighbor 192.168.1.6 default-originate
+neighbor 192.168.1.2 default-originate
+exit
+
+interface loopback 10
+ip address 10.0.0.1 255.255.255.0
+exit
+
+Andheri# show ip route
+Borivali# show ip route
+Borivali# traceroute 10.0.0.1
+ISP(config)# interface Serial1/0
+ISP(config-if)# shutdown
+Andheri# show ip route
+Borivali# show ip route
+Andheri# trace 10.0.0.1
+
 `;
 
 var text5 = `
-docker play-lab:
-docker swarm init --advertise-addr <MANAGER-IP>(tocreate new swarm)
-docker swarm init --advertise-addr 192.168.99.100
-docker info(current state of the swarm)
-docker node ls(info about nodes)
-(add nodes to the swarm)
-docker swarm join-token worker
-docker node ls
-(deploy a service to th swarm)
-docker service create --replicas 1 --name helloworld alpine ping docker.com
-docker service ls
-(Inspect a service)
-docker service inspect --pretty helloworld
-docker service ps helloworld
-docker ps
-(Scale the service in swarm)
-docker service scale helloworld=5
-docker service ps helloworld
-docker ps
-(delete the service running on the swarm)
-docker service rm helloworld
-docker service inspect helloworld
-docker ps
+r1:
+en
+conf t
+hostname R1
+
+interface Loopback0
+description R1 LAN
+ip address 192.168.1.1 255.255.255.0
+no shutdown
+exit
+
+interface se1/0
+description R1 --> R2
+ip address 10.1.1.1 255.255.255.252
+clock rate 128000
+no shutdown
+exit
+end
+
+r2:
+en
+conf t
+hostname R2
+
+interface se1/0
+description R2 --> R1
+ip address 10.1.1.2 255.255.255.252
+no shutdown
+exit
+
+interface se1/1
+description R2 --> R3
+ip address 10.2.2.1 255.255.255.252
+clock rate 128000
+no shutdown
+exit
+end
+
+r3:
+en
+conf t
+hostname R3
+
+interface Loopback0
+description R3 LAN
+ip address 192.168.3.1 255.255.255.0
+no shutdown
+exit
+
+interface se1/1
+description R3 --> R2
+ip address 10.2.2.2 255.255.255.252
+clock rate 128000
+no shutdown
+exit
+end
+
+R1(config)# ip route 0.0.0.0 0.0.0.0 10.1.1.2
+R3(config)# ip route 0.0.0.0 0.0.0.0 10.2.2.1
+R2(config)# ip route 192.168.1.0 255.255.255.0 10.1.1.1
+R2(config)# ip route 192.168.3.0 255.255.255.0 10.2.2.2
+
+R1# tclsh
+foreach address {
+  192.168.1.1
+  10.1.1.1
+  10.1.1.2
+  10.2.2.1
+  10.2.2.2
+  192.168.3.1
+} {
+  ping $address
+}
+exit
+
+R1(config)# security passwords min-length 10
+R1(config)# enable secret class12345
+R1(config)# line console 0
+R1(config-line)# password ciscoconpass
+R1(config-line)# exec-timeout 5 0
+R1(config-line)# login
+R1(config-line)# logging synchronous
+R1(config-line)# exit
+
+R1(config)# line vty 0 4
+R1(config-line)# password ciscovtypass
+R1(config-line)# exec-timeout 5 0
+R1(config-line)# login
+R1(config-line)# exit
+
+R1(config)# line aux 0
+R1(config-line)# no exec
+R1(config-line)# end
+
+R1(config)# service password-encryption
+R1(config)# banner motd $ Unauthorized access strictly prohibited! $
+
+R3(config)# security passwords min-length 10
+R3(config)# enable secret class12345
+R3(config)# line console 0
+R3(config-line)# password ciscoconpass
+R3(config-line)# exec-timeout 5 0
+R3(config-line)# login
+R3(config-line)# logging synchronous
+R3(config-line)# exit
+R3(config)# line vty 0 4
+R3(config-line)# password ciscovtypass
+R3(config-line)# exec-timeout 5 0
+R3(config-line)# login
+R3(config-line)# exit
+R3(config)# line aux 0
+R3(config-line)# no exec
+R3(config-line)# end
+R3(config)# service password-encryption
+R3(config)# banner motd $ Unauthorized access strictly prohibited! $
+
+R1(config)# username JR-ADMIN secret class12345
+R1(config)# username ADMIN secret class54321
+
+R1(config)# line console 0
+R1(config-line)# login local
+R1(config-line)# exit
+R1(config)# line vty 0 4
+R1(config-line)# login local
+R1(config-line)# end
+
+R3(config)# username JR-ADMIN secret class12345
+R3(config)# username ADMIN secret class54321
+R3(config)# line console 0
+R3(config-line)# login local
+R3(config-line)# exit
+R3(config)# line vty 0 4
+R3(config-line)# login local
+R3(config-line)# end
+
+R1(config)# ip domain-name ccnasecurity.com
+R1(config)# crypto key generate rsa general-keys modulus 1024
+R1(config)# ip ssh version 2
+R1(config)# line vty 0 4
+R1(config-line)# transport input ssh
+R1(config-line)# end
+
+R1# show ip ssh
+
+R3(config)# ip domain-name ccnasecurity.com
+R3(config)# crypto key generate rsa general-keys modulus 1024
+R3(config)# ip ssh version 2
+R3(config)# line vty 0 4
+R3(config-line)# transport input ssh
+R3(config-line)# end
+
+R1# ssh -l ADMIN 10.2.2.2
+
 `;
 
 var text6 = `
-1.	Creating a GitHub repository: Login into your github account, navigate to github and create a new repository.
-2.	Setting up CircleCI: by logging up with your GitHub account.
-Navigate to project page, you will be taken to the Projects dashboard. On the dashboard, select the project you want to set up (Hello_World) and click Set Up Project.
-Select the option to commit a starter CI pipeline to a new branch, and click Set Up Project.
-This will create a file .circleci/config.yml at the root of your repository on a new branch called circleci-project-setup.
-Select Faster and Setup the project:
-You will have your first green build. If you are happy with this configuration, you can merge it into your main branch later.
-3.	Digging into your first pipeline.
-Click on the say-hello-workflow button on your pipeline to investigate the following parts of the run:
-Within this workflow, the pipeline ran one job, called say-hello. Click say-hello.
-You can see the steps present in the job, click on them to view their functionality:
-a.	Spin up environment:
-b.	Preparing environment variables:
-c.	Checkout code:
-d.	Say hello:
-e.	Breaking your build!
-Let’s get a bit more complex. Let’s edit our .circleci/config.yml file now.
-i.	Navigate to your project by clicking on the job say-hello(1), it will launch the following page, click on the circle-project-setup link present under Branch/Commit.
-ii.	Now click on the Edit Config tab, following page of config.yml will get launched. 
-iii.	Now you can see the config.yml code file.
-iv.	Replace the text as shown below: You can change printing statement by any random text.
-v.	Save and Run, it will launch following prompt, click on Commit Changes.
-vi.	Wait till the process gets completed.
-vii.	Once process get completed you can see the following
-window: Click on say-hello, it will fetch another window tab.
-viii.	Click on Hello_World project to view jobs.
-Now, notice that you have two jobs present under your project.
-ix.	Check the tests of both jobs.
-Click on say-hello 1 to view steps.
-Check the functionality test done under say hello.
-x.	Click on say-hello 2 to view steps.
-Check the functionality test done under Say hello.
+R1:
+en
+conf t
+hostname R1
+
+interface Loopback1
+description R1 LAN
+ip address 192.168.1.1 255.255.255.0
+exit
+
+interface Serial1/0
+description R1 --> R2
+ip address 172.16.12.1 255.255.255.248
+clock rate 128000
+bandwidth 128
+no shutdown
+exit
+
+interface Serial1/1
+description R1 --> R3
+ip address 172.16.13.1 255.255.255.248
+bandwidth 64
+no shutdown
+exit
+end
+
+r2:
+en
+conf t
+hostname R2
+
+interface Loopback2
+description R2 LAN
+ip address 192.168.2.1 255.255.255.0
+exit
+
+interface Serial1/0
+description R2 --> R1
+ip address 172.16.12.2 255.255.255.248
+bandwidth 128
+no shutdown
+exit
+
+interface Serial1/1
+description R2 --> R3
+ip address 172.16.23.2 255.255.255.248
+bandwidth 64
+no shutdown
+exit
+end
+
+r3:
+en
+conf t
+hostname R3
+
+interface Loopback3
+description R3 LAN
+ip address 192.168.3.1 255.255.255.0
+exit
+
+interface Serial1/1
+description R3 --> R1
+ip address 172.16.13.3 255.255.255.248
+clock rate 64000
+bandwidth 128
+no shutdown
+exit
+
+interface Serial1/0
+description R3 --> R2
+ip address 172.16.23.3 255.255.255.248
+bandwidth 64
+no shutdown
+exit
+
+interface Serial1/2
+description R3 --> R4
+ip address 172.16.34.3 255.255.255.248
+clock rate 64000
+bandwidth 64
+no shutdown
+exit
+end
+
+r4:
+en
+conf t
+hostname R4
+
+interface Loopback4
+description R4 LAN A
+ip address 192.168.4.1 255.255.255.128
+exit
+
+interface Loopback5
+description R4 LAN B
+ip address 192.168.4.129 255.255.255.128
+no shutdown
+exit
+
+interface Serial1/0
+description R4 --> R3
+ip address 172.16.34.4 255.255.255.248
+bandwidth 64
+no shutdown
+exit
+end
+
+r3:
+show ip interface brief | include up
+show protocols
+show interfaces description | include up    
+
+r1:
+config t
+router eigrp 1
+network 192.168.1.0
+network 172.16.12.0 0.0.0.7
+network 172.16.13.0 0.0.0.7
+no auto-summary
+exit
+
+r2:
+config t
+router eigrp 1
+network 192.168.2.0
+network 172.16.12.0 0.0.0.7
+network 172.16.23.0 0.0.0.7
+no auto-summary
+exit
+
+r3:
+config t
+router eigrp 1
+network 192.168.3.0
+network 172.16.13.0 0.0.0.7
+network 172.16.23.0 0.0.0.7
+network 172.16.34.0 0.0.0.7
+no auto-summary
+exit
+
+r4:
+config t
+router eigrp 1
+network 192.168.4.0
+network 172.16.34.0 0.0.0.7
+no auto-summary
+exit
+
+all: show ip eigrp neighbors
+r1:
+tclsh
+foreach address {
+  172.16.12.1
+  172.16.12.2
+  172.16.13.1
+  172.16.13.3
+  172.16.23.2
+  172.16.23.3
+  172.16.34.3
+  172.16.34.4
+  192.168.1.1
+  192.168.2.1
+  192.168.3.1
+  192.168.4.1
+  192.168.4.129
+} {
+  ping $address
+}
+exit
+
+R1# show ip route | begin Gateway
+R4# traceroute 192.168.1.1 source 192.168.4.1
+R4# traceroute 192.168.1.1 source 192.168.4.129
+R3# show ip route | begin Gateway
+R3# show interfaces serial1/2
+R3# show interfaces serial1/1 | include BW
+R3# show interfaces serial1/0 | include BW
+R3(config)# access-list 101 permit ip 192.168.4.0 0.0.0.127 any
+R3(config)# route-map PBR-ROUTE permit 10
+R3(config-route-map)# match ip address 101
+R3(config-route-map)# set interface Serial1/1
+R3(config-route-map)# exit
+
+R4(config)# interface Loopback4
+R4(config-if)# ip policy route-map PBR-ROUTE
+R4(config-if)# exit
+
+R3# show route-map
+R3# show ip policy
+R4# traceroute 192.168.1.1 source 192.168.4.1
+R4(config)# interface Loopback4
+R4(config-if)# no ip policy route-map PBR-ROUTE
+R4(config-if)# exit
+R4# traceroute 192.168.1.1 source 192.168.4.1
+
 `;
 
 var text7 = `
-minikube version
-minikube start
-kubectl version
-kubectl cluster-info
-kubectl get nodes
-kubectl create deployment kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1
-kubectl get deployments
-View:
-2nd terminal:
-echo -e "\n\n\n\e[92mStarting Proxy. After starting it will not output a response. Please click the first Terminal Tab\n"; 
-kubectl proxy
-1st terminal:
-curl http://localhost:8001/version 
-export POD_NAME=$(kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}') 
-echo Name of the Pod: $POD_NAME
-curl http://localhost:8001/api/v1/namespaces/default/pods/$POD_NAME/ 
-explore:
-kubectl get pods
-kubectl describe pods
-kubectl expose deployment/kubernetes-bootcamp --type="NodePort" --port 8080
-kubectl get services
-new term:
-echo -e "\n\n\n\e[92mStarting Proxy. After starting it will not output a response. Please click the first Terminal Tab\n"; 
-kubectl proxy
-1st
-export POD_NAME=$(kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}') 
-echo Name of the Pod: $POD_NAME  
-curl http://localhost:8001/api/v1/namespaces/default/pods/$POD_NAME/proxy/ 
-kubectl logs $POD_NAME 
-kubectl exec $POD_NAME -- env
-kubectl exec -ti $POD_NAME -- bash 
-cat server.js 
-curl localhost:8080
-exit 
-new service:
-kubectl get pods 
- kubectl get services 
-kubectl expose deployment/kubernetes-bootcamp --type="NodePort" --port 8080 
- kubectl get services 
-kubectl describe services/kubernetes-bootcamp 
- export NODE_PORT=$(kubectl get services/kubernetes-bootcamp -o go- template='{{(index .spec.ports 0).nodePort}}') 
-echo NODE_PORT=$NODE_PORT 
- curl $(minikube ip):$NODE_PORT 
-kubectl describe deployment 
-kubectl get pods -l app=kubernetes-bootcamp 
- kubectl get services -l app=kubernetes-bootcamp
-export POD_NAME=$(kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}') 
-echo Name of the Pod: $POD_NAME 
- kubectl label pods $POD_NAME version=v1 
-kubectl describe pods $POD_NAME 
- kubectl get pods -l version=v1 
-deleting:
-  kubectl delete service -l app=kubernetes-bootcamp
-kubectl get services 
-curl $(minikube ip):$NODE_PORT 
-kubectl exec -ti $POD_NAME -- curl localhost:8080 
+sw1:
+en
+conf t
+hostname SW1
+
+! Create VLANs
+vlan 10
+name Sales
+exit
+
+vlan 20
+name HR
+exit
+
+vlan 30
+name IT
+exit
+
+interface FastEthernet0/1
+switchport mode access
+switchport access vlan 10
+exit
+
+interface FastEthernet0/2
+switchport mode access
+switchport access vlan 20
+exit
+
+interface FastEthernet0/3
+switchport mode access
+switchport access vlan 30
+exit
+
+interface FastEthernet0/24
+switchport mode trunk
+switchport trunk encapsulation dot1q
+exit
+show vlan brief
+
+pc1:
+ip address 192.168.10.2 255.255.255.0
+gateway 192.168.10.1
+
+pc2:
+ip address 192.168.20.2 255.255.255.0
+gateway 192.168.20.1
+
+ping 192.168.20.2   # From PC1 to PC2
+ping 192.168.10.2   # From PC2 to PC1
+
+both: show vlan brief
+
+sw1:
+show ip interface brief
+show ip route
 
 `;
 
 var text8 = `
-Product.cs:
-namespace MaPract8.Models
-{
-    public class Product
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public decimal Price { get; set; }
-        public int CategoryId { get; set; }
-    }
-}
-Category.cs:
-namespace MaPract8.Models
-{
-    public class Category
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-    }
-}
-ProductContext.cs:
-using Microsoft.EntityFrameworkCore;
-using MaPract8.Models;
+r1:
+config t
+hostname R1
+int lo0
+ip add 1.1.1.1 255.255.255.255
+ip ospf 1 area 0
+int f0/0
+ip add 10.0.0.1 255.255.255.0
+no shut
+ip ospf 1 area 0
 
-namespace MaPract8.DBContexts
-{
-    public class ProductContext : DbContext
-    {
-        public ProductContext(DbContextOptions<ProductContext> options) : base(options) { }
+r2:
+config t
+hostname R2
+int lo0
+ip add 2.2.2.2 255.255.255.255
+ip ospf 1 area 0
+int f0/0
+ip add 10.0.0.2 255.255.255.0
+no shut
+ip ospf 1 area 0
+int f1/0
+ip add 10.0.1.2 255.255.255.0
+no shut
+ip ospf 1 area 0
 
-        public DbSet<Product> Products { get; set; }
-        public DbSet<Category> Categories { get; set; }
+r3:
+config t
+hostname R3
+int lo0
+ip add 3.3.3.3 255.255.255.255
+ip ospf 1 area 0
+int f0/0
+ip add 10.0.1.3 255.255.255.0
+no shut
+ip ospf 1 area 0
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Category>().HasData(
-                new Category { Id = 1, Name = "Electronics", Description = "Electronic Items" },
-                new Category { Id = 2, Name = "Clothes", Description = "Dresses" },
-                new Category { Id = 3, Name = "Grocery", Description = "Grocery Items" }
-            );
-        }
-    }
-}
-ProductRepositor.cs:
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using MaPract8.DBContexts;
-using MaPract8.Models;
+r1:
+config t
+router ospf 1
+mpls ldp autoconfig
 
-namespace MaPract8.Repository
-{
-    public class ProductRepository : IProductRepository
-    {
-        private readonly ProductContext _dbContext;
+r2:
+exit
+router ospf 1
+mpls ldp autoconfig
 
-        public ProductRepository(ProductContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
+r3:
+exit
+router ospf 1
+mpls ldp autoconfig
 
-        public IEnumerable<Product> GetProducts() => _dbContext.Products.ToList();
+r1:
+config t
+router bgp 1
+neighbor 3.3.3.3 remote-as 1
+neighbor 3.3.3.3 update-source Loopback0
+no auto-summary
+address-family vpnv4
+neighbor 3.3.3.3 activate
 
-        public Product GetProductByID(int productId) => _dbContext.Products.Find(productId);
+r3:
+config t
+router bgp 1
+neighbor 1.1.1.1 remote-as 1
+neighbor 1.1.1.1 update-source Loopback0
+no auto-summary
+address-family vpnv4
+neighbor 1.1.1.1 activate
 
-        public void InsertProduct(Product product)
-        {
-            _dbContext.Add(product);
-            Save();
-        }
+R1#sh bgp vpnv4 unicast all summary
 
-        public void DeleteProduct(int productId)
-        {
-            var product = _dbContext.Products.Find(productId);
-            _dbContext.Products.Remove(product);
-            Save();
-        }
+r4:
+config t
+int lo0
+ip add 4.4.4.4 255.255.255.255
+ip ospf 2 area 2
+int f0/0
+ip add 192.168.1.4 255.255.255.0
+ip ospf 2 area 2
+no shut
 
-        public void UpdateProduct(Product product)
-        {
-            _dbContext.Entry(product).State = EntityState.Modified;
-            Save();
-        }
+r1:
+config t
+int f1/0
+ip add 192.168.1.1 255.255.255.0
+no shut
+exit
+ip vrf RED
+rd 4:4
+route-target both 4:4
+int f1/0
+ip vrf forwarding RED
+ip address 192.168.1.1 255.255.255.0
+int f1/0
+ip ospf 2 area 2
+R1#sh ip route vrf RED
 
-        public void Save() => _dbContext.SaveChanges();
-    }
-}
+r6:
+config t
+hostname R6
+int lo0
+ip add 6.6.6.6 255.255.255.255
+ip ospf 2 area 2
+int f0/0
+ip add 192.168.2.6 255.255.255.0
+ip ospf 2 area 2
+no shut
 
-ProductController.cs:
-using Microsoft.AspNetCore.Mvc;
-using MaPract8.Models;
-using MaPract8.Repository;
-using System.Collections.Generic;
-using System.Transactions;
+r1:
+config t
+router bgp 1
+address-family ipv4 vrf RED
+redistribute ospf 2
 
-namespace MaPract8.Controllers
-{
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ProductController : ControllerBase
-    {
-        private readonly IProductRepository _productRepository;
+r3:
+config t
+router bgp 1
+address-family ipv4 vrf RED
+redistribute ospf 2
 
-        public ProductController(IProductRepository productRepository)
-        {
-            _productRepository = productRepository;
-        }
+r1:
+config t
+router ospf 2
+redistribute bgp 1 subnets
 
-        [HttpGet]
-        public IActionResult Get() => Ok(_productRepository.GetProducts());
+r3:
+config t
+router ospf 2
+redistribute bgp 1 subnets
 
-        [HttpGet("{id}")]
-        public IActionResult Get(int id) => Ok(_productRepository.GetProductByID(id));
-
-        [HttpPost]
-        public IActionResult Post([FromBody] Product product)
-        {
-            using var scope = new TransactionScope();
-            _productRepository.InsertProduct(product);
-            scope.Complete();
-            return CreatedAtAction(nameof(Get), new { id = product.Id }, product);
-        }
-
-        [HttpPut]
-        public IActionResult Put([FromBody] Product product)
-        {
-            if (product == null) return NoContent();
-            using var scope = new TransactionScope();
-            _productRepository.UpdateProduct(product);
-            scope.Complete();
-            return Ok();
-        }
-
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-            _productRepository.DeleteProduct(id);
-            return Ok();
-        }
-    }
-}
-
-startup.cs:
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.EntityFrameworkCore;
-using MaPract8.DBContexts;
-using MaPract8.Repository;
-
-namespace MaPract8
-{
-    public class Startup
-    {
-        public Startup(IConfiguration configuration) { Configuration = configuration; }
-
-        public IConfiguration Configuration { get; }
-
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddDbContext<ProductContext>(o => o.UseSqlServer(Configuration.GetConnectionString("productdb")));
-            services.AddTransient<IProductRepository, ProductRepository>();
-            services.AddControllers();
-        }
-
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
-            app.UseRouting();
-            app.UseAuthorization();
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
-        }
-    }
-}
-appsettings.json (Database Connection):
-{
-  "ConnectionStrings": {
-    "productdb": "Server=YourServerName;Database=productsdb;Trusted_Connection=True;"
-  },
-  "Logging": {
-    "LogLevel": {
-      "Default": "Information",
-      "Microsoft": "Warning",
-      "Microsoft.Hosting.Lifetime": "Information"
-    }
-  },
-  "AllowedHosts": "*"
-}
+R4#sh ip route
+R6#sh ip route
+R4#ping 6.6.6.6
+R4#trace 6.6.6.6
 
 `;
 
+var text9 = `
+r1:
+en
+conf t
+hostname R1
+
+! Configure Serial Interfaces
+interface Serial2/0
+ip address 20.0.0.1 255.0.0.0
+no shutdown
+exit
+
+interface Serial2/1
+ip address 10.0.0.2 255.0.0.0
+no shutdown
+exit
+
+interface FastEthernet0/0
+ip address 60.0.0.1 255.0.0.0
+no shutdown
+exit
+
+r2:
+en
+conf t
+hostname R2
+
+interface Serial2/1
+ip address 20.0.0.2 255.0.0.0
+no shutdown
+exit
+
+R1(config)# ip route 0.0.0.0 0.0.0.0 10.0.0.2
+R3(config)# ip route 0.0.0.0 0.0.0.0 10.2.2.1
+R2(config)# ip route 192.168.1.0 255.255.255.0 10.1.1.1
+R2(config)# ip route 192.168.3.0 255.255.255.0 10.2.2.2
+
+R1# ping 192.168.3.1
+R2# ping 192.168.1.1
+R3# ping 20.0.0.1
+
+R1# show ip route
+R2# show ip route
+R3# show ip route
+
+pc1 r1:
+ip address 192.168.1.100 255.255.255.0
+gateway 192.168.1.1
+
+pc2 r2:
+ip address 192.168.2.100 255.255.255.0
+gateway 192.168.2.1
+
+pc3 r3:
+ip address 192.168.3.100 255.255.255.0
+gateway 192.168.3.1
+
+pc1:
+ping 192.168.3.100  # Test connection to PC3
+ping 192.168.2.100  # Test connection to PC2
+
+pc2:
+ping 192.168.1.100  # Test connection to PC1
+ping 192.168.3.100  # Test connection to PC3
+
+pc3:
+ping 192.168.1.100  # Test connection to PC1
+ping 192.168.2.100  # Test connection to PC2
+
+`;
         function copyText(text, name) {
             navigator.clipboard.writeText(text).then(function () {
                 document.getElementById('copiedMsg').innerHTML = `Copied: ${name}`;
