@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Copy Text Buttons</title>
     <style>
+        button {
+            margin: 5px;
+        }
+
         body {
             background-color: #f0f0f0;
+            /* Light gray background */
             font-family: Arial, sans-serif;
             text-align: center;
         }
@@ -16,1286 +22,351 @@
             padding: 10px;
             font-size: 16px;
             background-color: #ddd;
+            /* Light gray button background */
             border: 1px solid #aaa;
+            /* Dark gray border */
             cursor: pointer;
         }
 
         button:hover {
             background-color: #ccc;
+            /* Slightly darker background on hover */
         }
     </style>
 </head>
 
 <body>
 
-    <h2>Click to Copy Code Snippets</h2>
-
-    <button onclick="copyText(text1, 'IPSLAFeature')">IPSLA</button>
-<button onclick="copyText(text2, 'IPslaTrack&pathControl')">iptrackk&path</button>
-<button onclick="copyText(text3, 'As_path')">As_path</button>
-<button onclick="copyText(text4, 'IBGP,EBGP,Local,MED')">gplocamed</button>
-<button onclick="copyText(text5, 'secure&management')">Securmanagement</button>
-<button onclick="copyText(text6, 'PBR')">PBR</button>
-<button onclick="copyText(text7, 'VLAN')">VLAN</button>
-<button onclick="copyText(text8, 'MPLS')">MPLS</button>
-<button onclick="copyText(text9, 'Static')">Staticrouting</button>
-
-
+    <button onclick="copyText(text1)">ExpertSystemAIML</button>
+    <button onclick=" copyText(text2)">botusingAIML</button>
+    <button onclick="copyText(text3)">BayesTheorem</button>
+    <button onclick="copyText(text4)">ConditionalProbab</button>
+    <button onclick="copyText(text5)">JointProbab</button>
+    <button onclick="copyText(text6)">Fuzzy</button>
+    <button onclick="copyText(text7)">Supervised </button>
+<button onclick="copyText(text8)">UnSupervised </button>
+    <button onclick="copyText(text9)">ClusteringAlgo</button>
+    
+    
     <p id="copiedMsg"></p>
-
     <script>
-        var text1 = `
-R1:
-en
-conf t
-hostname R1
 
-int Loopback0
-description R1 LAN
-ip address 192.168.1.1 255.255.255.0
+        var text1= `
+a.	startup.xml:
 
-int se2/0
-description R1-->ISP1
-ip address 209.165.201.2 255.255.255.252
-clock rate 128000
-bandwidth 128
-no shutdown
+<aiml version = "1.0.1" encoding = "UTF-8">
+<category>
+<pattern>LOAD AIML 1</pattern>
+<template>
+<learn>chat.aiml</learn>
+</template>
+</category>
+</aiml>
 
-int se2/1
-description R1-->ISP2
-ip address 209.165.202.130 255.255.255.252
-bandwidth 128
-no shutdown
-end
+b.	chat.aiml:
 
-R2:
-en
-conf t
-hostname ISP1
+<aiml version = "1.0.1" encoding = "UTF-8">
+<category>
+<pattern>HELLO</pattern>
+<template>
+Well, Hello!!, What can I do for You ?
+</template>
+</category>
+<category>
+<pattern>WHAT ARE YOU</pattern>
+<template>
+I am your custom designed chatbot
+</template>
+</category>
+<category>
+<pattern>WHAT DO YOU DO</pattern>
+<template>
+I am here to respond to your querry! ^_^ :)
+</template>
+</category>
+<category>
+<pattern>WHO IS YOUR BOSS</pattern>
+<template>
+My Boss is Roshni Gupta
+</template>
+</category>
+<category>
+<pattern>WHAT IS YOUR NAME</pattern>
+<template>
+My name is VECNA!!
+</template>
+</category>
+</aiml>
 
-int Loopback0
-description Simulated Internet Web Server
-ip address 209.165.200.254 255.255.255.255
+c.	python.py:
 
-int Loopback1
-description ISP1 DNS Server
-ip address 209.165.201.30 255.255.255.255
+import aiml
+kernel = aiml.Kernel()
+kernel.learn("startup.xml")
+kernel.respond("load aiml 1")
+while True:
+    input_text = input(">Human : ")
+    response = kernel.respond(input_text)
+    print(">BOT : " + response)
 
-int se2/0
-description ISP1-->R1
-ip address 209.165.201.1 255.255.255.252
-bandwidth 128
-no shutdown
 
-int se2/1
-description ISP1-->ISP2
-ip address 209.165.200.225 255.255.255.252
-clock rate 128000
-bandwidth 128
-no shutdown
-end
+         `;
 
-R3:
-en
-conf t
-hostname ISP2
+        var text2 = ` 
+a.	startup.xml:
 
-int Loopback0
-description Simulated Internet Web Server
-ip address 209.165.200.254 255.255.255.255
+<aiml version = "1.0.1" encoding = "UTF-8">
+<category>
+<pattern>LOAD AIML 1</pattern>
+<template>
+<learn>chat.aiml</learn>
+</template>
+</category>
 
-int Loopback1
-description ISP2 DNS Server
-ip address 209.165.202.158 255.255.255.255
+<category>
+<pattern>LOAD AIML 2</pattern>
+<template>
+<learn>chat2.aiml</learn>
+</template>
+</category>
+</aiml>
 
-int se2/0
-description ISP2-->R1
-ip address 209.165.202.129 255.255.255.252
-clock rate 128000
-bandwidth 128
-no shutdown
+b.	chat2.aiml:
 
-int se2/1
-description ISP2-->ISP1
-ip address 209.165.200.226 255.255.255.252
-bandwidth 128
-no shutdown
-end
+<aiml version = "1.0.1" encoding = "UTF-8">
+<category>
+<pattern>HELLO</pattern>
+<template>
+Well, Hello!!, What can I do for You ?
+</template>
+</category>
+<category>
+<pattern>SUNDAY</pattern>
+<template>
+The day of the week before Monday and following Saturday
+</template>
+</category>
+<category>
+<pattern>MONDAY</pattern>
+<template>
+The day of the week before Tuesday and following Sunday
+</template>
+</category>
+<category>
+<pattern>TUESDAY</pattern>
+<template>
+The day of the week before Wednesday and following Monday
+</template>
+</category>
+<category>
+<pattern>WEDNESDAY</pattern>
+<template>
+The day of the week before Thursday and following Tuesday
+</template>
+</category>
+<category>
+<pattern>THURSDAY</pattern>
+<template>
+The day of the week before Friday and following Wednesday
+</template>
+</category>
+<category>
+<pattern>FRIDAY</pattern>
+<template>
+The day of the week before Saturday and following Thursday
+</template>
+</category>
+<category>
+<pattern>SATURDAY</pattern>
+<template>
+The day of the week before Sunday and following Friday
+</template>
+</category>
+</aiml>
 
-All: show interfaces description | include up
-
-R1:ip route 0.0.0.0 0.0.0.0 209.165.201.1
-R2:
-config t
-router eigrp 1
-network 209.165.200.224 0.0.0.3
-network 209.165.201.0 0.0.0.31
-no auto-summary
-exit
-ip route 192.168.1.0 255.255.255.0 209.165.201.2
-
-R3:
-config t
-router eigrp 1
-network 209.165.200.224 0.0.0.3
-network 209.165.202.128 0.0.0.31
-no auto-summary
-exit
-ip route 192.168.1.0 255.255.255.0 209.165.202.130
-
-Ping from R1:
-tclsh
-R1(tcl)# foreach address {
-+>(tcl)# 209.165.200.254
-+>(tcl)# 209.165.201.30
-+>(tcl)# 209.165.202.158
-+>(tcl)# } {
-+>(tcl)# ping $address source 192.168.1.1
-+>(tcl)# }
-
-R1(tcl)# foreach address {
-+>(tcl)# 209.165.200.254
-+>(tcl)# 209.165.201.30
-+>(tcl)# 209.165.202.158
-+>(tcl)# } {
-+>(tcl)# traceroute $address source 192.168.1.1
-+>(tcl)# }
+     
 `;
 
-var text2 = `
-r1:
-en
-conf t
-hostname R1
+        var text3 = `
+def drug_user(
+    prob_th = 0.8,
+    sensitivity = 0.79,
+    specificity = 0.79,
+    prevelance = 0.02,
+    verbose = True):
+    p_user = prevelance
+    p_non_user = 1 - prevelance
+    p_pos_user = sensitivity
+    p_neg_user = specificity
+    p_pos_non_user = 1 - specificity
+    num = p_pos_user * p_user
+    den = p_pos_user * p_user + p_pos_non_user * p_non_user
+    prob = num/den
+    if verbose:
+        if prob > prob_th:
+            print("The test-taker could be an user")
+        else:
+            print("The test-taker may may not be na user")
+    return prob
+print("Roshni Gupta")
+p = drug_user(prob_th = 0.5, sensitivity = 0.97, specificity = 0.95,
+prevelance = 0.005)
+print("Probability of the test-taker being a drug user is : ", round(p,3))
 
-int Loopback0
-description R1 LAN
-ip address 192.168.1.1 255.255.255.0
-
-int se2/0
-description R1-->ISP1
-ip address 209.165.201.2 255.255.255.252
-clock rate 128000
-bandwidth 128
-no shutdown
-
-int se2/1
-description R1-->ISP2
-ip address 209.165.202.130 255.255.255.252
-bandwidth 128
-no shutdown
-end
-
-Ping ISP1&iSp2:
-tclsh
-foreach address {
-  209.165.200.254
-  209.165.201.30
-  209.165.202.158
-} {
-  ping $address source 192.168.1.1
-}
-exit
-
-R1# en
-config t
-ip sla 11
-icmp-echo 209.165.201.30
-frequency 10
-exit
-ip sla schedule 11 life forever start-time now
-
-r1#show ip sla configuration 11
-R1# show ip sla statistics
-
-R1# config t
-R1(config)# ip sla 22
-R1(config-ip-sla)# icmp-echo 209.165.202.158
-R1(config-ip-sla-echo)# frequency 10
-R1(config-ip-sla-echo)# exit
-R1(config)# ip sla schedule 22 life forever start-time now
-R1# show ip sla configuration 22
-R1# show ip sla statistics 22
-
-config t
-R1(config)# no ip route 0.0.0.0 0.0.0.0 209.165.201.1
-R1(config)# ip route 0.0.0.0 0.0.0.0 209.165.201.1 5
-R1(config)# exit
-
-R1# show ip route | begin Gateway
-
-R1(config)# track 1 ip sla 11 reachability
-R1(config-track)# delay down 10 up 1
-R1(config-track)# exit
-
-R1(config)# ip route 0.0.0.0 0.0.0.0 209.165.201.1 2 track 1
-
-R1(config)# track 2 ip sla 22 reachability
-R1(config-track)# delay down 10 up 1
-R1(config-track)# exit
-
-R1(config)# ip route 0.0.0.0 0.0.0.0 209.165.202.129 3 track 2
-R1# show ip route | begin Gateway
-
-ISP1# config t
-ISP1(config)# interface loopback 1
-ISP1(config-if)# shutdown
-
-R1# show ip route
-R1# show ip sla statistics
-R1# trace 209.165.200.254 source 192.168.1.1
-ISP1# no shutdown
-R1# show ip sla statistics
-R1# show ip route | begin Gateway
-`;
-
-var text3 = `
-r1andher:
-en
-conf t
-hostname Andheri
-
-interface Loopback0
-ip address 10.1.1.1 255.255.255.0
-exit
-
-interface Serial2/0
-ip address 192.168.1.5 255.255.255.252
-no shutdown
-exit
-end
-
-r2 bandra:
-en
-conf t
-hostname Bandra
-
-interface Loopback0
-ip address 10.2.2.1 255.255.255.0
-exit
-
-interface Serial2/0
-ip address 192.168.1.6 255.255.255.252
-no shutdown
-exit
-
-interface Serial2/1
-ip address 172.24.1.17 255.255.255.252
-no shutdown
-exit
-end
-
-3 churchgate:
-en
-conf t
-hostname Churchgate
-
-interface Loopback0
-ip address 10.3.3.1 255.255.255.0
-exit
-
-interface Serial2/1
-ip address 172.24.1.18 255.255.255.252
-no shutdown
-exit
-end
-
-all:
-Andheri# show interfaces description | include up
-Bandra# show interfaces description | include up
-Churchgate# show interfaces description | include up
-B#ping 192.168.1.5
-
-Andheri# config t
-Andheri(config)# router bgp 100
-Andheri(config-router)# neighbor 192.168.1.6 remote-as 300
-Andheri(config-router)# network 10.1.1.0 mask 255.255.255.0
-
-Bandra# config t
-Bandra(config)# router bgp 300
-Bandra(config-router)# neighbor 192.168.1.5 remote-as 100
-Bandra(config-router)# neighbor 172.24.1.18 remote-as 65000
-Bandra(config-router)# network 10.2.2.0 mask 255.255.255.0
-
-Churchgate# config t
-Churchgate(config)# router bgp 65000
-Churchgate(config-router)# neighbor 172.24.1.17 remote-as 300
-Churchgate(config-router)# network 10.3.3.0 mask 255.255.255.0
-
-Bandra# show ip bgp neighbors
-Andheri# show ip route
-Andheri# ping 10.3.3.1 source 10.1.1.1
-Andheri# show ip bgp
-
-Bandra# config t
-Bandra(config)# ip as-path access-list 1 deny ^100$
-Bandra(config)# ip as-path access-list 1 permit .*
-Bandra(config)# router bgp 300
-Bandra(config-router)# neighbor 192.168.1.5 remove-private-as
-Bandra(config-router)# exit
-Bandra# clear ip bgp *
-
-Andheri# show ip route
-Bandra# show ip bgp regexp ^100$
-Bandra# tclsh
-foreach address {
-  10.1.1.1
-  10.2.2.1
-  10.3.3.1
-  192.168.1.5
-  192.168.1.6
-  172.24.1.17
-  172.24.1.18
-} {
-  ping $address
-}
-exit
-`;
-
-var text4 = `
-r1 ISP:
-en
-conf t
-hostname ISP
-
-no ip domain-lookup  
-line con 0  
-logging synchronous  
-exec-timeout 0 0  
-exit
-
-interface Loopback0
-description Dhiraj Pawar 100
-ip address 192.168.100.1 255.255.255.0
-exit
-
-interface se1/0
-ip address 192.168.1.5 255.255.255.252
-clock rate 128000
-no shutdown
-exit
-
-interface se1/1
-ip address 192.168.1.1 255.255.255.252
-no shutdown
-exit
-end
-
-r2 andheri:
-en
-conf t
-hostname Andheri
-
-no ip domain-lookup  
-line con 0  
-logging synchronous  
-exec-timeout 0 0  
-exit
-
-interface Loopback0
-ip address 172.16.64.1 255.255.255.0
-exit
-
-interface se1/0
-ip address 192.168.1.6 255.255.255.252
-no shutdown
-exit
-
-interface se1/1
-ip address 172.16.1.1 255.255.255.0
-clock rate 128000
-no shutdown
-exit
-end
-
-r3 borivali:
-en
-conf t
-hostname Borivali
-
-no ip domain-lookup  
-line con 0  
-logging synchronous  
-exec-timeout 0 0  
-exit
-
-interface Loopback0
-ip address 172.16.32.1 255.255.255.0
-exit
-
-interface se1/0
-ip address 192.168.1.2 255.255.255.252
-clock rate 128000
-no shutdown
-exit
-
-interface se1/1
-ip address 172.16.1.2 255.255.255.0
-no shutdown
-exit
-end
-
-ISP# ping 172.16.1.1
-Andheri# ping 172.16.1.2
-Andheri# ping 192.168.1.1
-
-andheri, borivali:
-config t
-router eigrp 1
-network 172.16.0.0
-exit
-
-andher:
-config t
-router bgp 64512
-neighbor 172.16.32.1 remote-as 64512
-neighbor 172.16.32.1 update-source lo0
-exit
-
-borivali:
-config t
-router bgp 64512
-neighbor 172.16.64.1 remote-as 64512
-neighbor 172.16.64.1 update-source lo0
-exit
-Borivali# show ip bgp neighbors
-
-isp:
-config t
-router bgp 200
-neighbor 192.168.1.6 remote-as 64512
-neighbor 192.168.1.2 remote-as 64512
-network 192.168.100.0
-exit
-
-Andheri(config)# ip route 172.16.0.0 255.255.0.0 null0
-
-borivali:
-config t
-router bgp 64512
-neighbor 192.168.1.1 remote-as 200
-network 172.16.0.0
-exit
-
-Andheri# show ip bgp neighbors
-Borivali# show ip bgp neighbors
-
-isp:
-config t
-router bgp 200
-network 192.168.1.0 mask 255.255.255.252
-network 192.168.1.4 mask 255.255.255.252
-exit
-ISP# show ip bgp
-
-andheri:
-config t
-router bgp 64512
-neighbor 172.16.32.1 next-hop-self
-exit
-
-borivali:
-config t
-router bgp 64512
-neighbor 172.16.64.1 next-hop-self
-exit
-
-Andheri# clear ip bgp *
-Borivali# clear ip bgp *
-
-andheri:
-config t
-route-map PRIMARY_T1_IN permit 10
-set local-preference 150
-exit
-router bgp 64512
-neighbor 192.168.1.5 route-map PRIMARY_T1_IN in
-exit
-
-borivali:
-config t
-route-map SECONDARY_T1_IN permit 10
-set local-preference 125
-exit
-router bgp 64512
-neighbor 192.168.1.1 route-map SECONDARY_T1_IN in
-exit
-
-Andheri# clear ip bgp * soft
-Borivali# clear ip bgp * soft
-Andheri# show ip bgp
-Borivali# show ip bgp
-
-andheri:
-config t
-route-map PRIMARY_T1_MED_OUT permit 10
-set metric 50
-exit
-router bgp 64512
-neighbor 192.168.1.5 route-map PRIMARY_T1_MED_OUT out
-exit
-
-borivali:
-config t
-route-map SECONDARY_T1_MED_OUT permit 10
-set metric 75
-exit
-router bgp 64512
-neighbor 192.168.1.1 route-map SECONDARY_T1_MED_OUT out
-exit
-
-Andheri# clear ip bgp * soft
-Borivali# clear ip bgp * soft
-
-isp:
-config t
-router bgp 200
-neighbor 192.168.1.6 default-originate
-neighbor 192.168.1.2 default-originate
-exit
-
-interface loopback 10
-ip address 10.0.0.1 255.255.255.0
-exit
-
-Andheri# show ip route
-Borivali# show ip route
-Borivali# traceroute 10.0.0.1
-ISP(config)# interface Serial1/0
-ISP(config-if)# shutdown
-Andheri# show ip route
-Borivali# show ip route
-Andheri# trace 10.0.0.1
 
 `;
 
-var text5 = `
-r1:
-en
-conf t
-hostname R1
+        var text4 = `
+def conditional():
+    pass_stats = 0.15
+    pass_codingWStats = 0.60
+    pass_codingWOStats = 0.40
+    prob_both = pass_stats * pass_codingWStats
+    print("The probability that applicant passes both is : ",round(prob_both, 3))
+    prob_coding = (prob_both) + ((1 - pass_stats) * pass_codingWOStats)
+    print("The Probability that he/she passes obly coding is : ",round(prob_coding, 3))
+    stats_given_coding = prob_both / prob_coding
+    print("Conditional probability is : ", round(stats_given_coding, 3))
+print("Roshni Gupta")
+conditional()
 
-interface Loopback0
-description R1 LAN
-ip address 192.168.1.1 255.255.255.0
-no shutdown
-exit
+        `;
 
-interface se1/0
-description R1 --> R2
-ip address 10.1.1.1 255.255.255.252
-clock rate 128000
-no shutdown
-exit
-end
+        var text5 = `
+Install seaborn: pip install seaborn
+import seaborn as sns
+from matplotlib import pyplot as plt
+tips=sns.load_dataset('tips')
+tips.head()
+sns.jointplot(x='total_bill',y='tip',data=tips)
+plt.show()
 
-r2:
-en
-conf t
-hostname R2
 
-interface se1/0
-description R2 --> R1
-ip address 10.1.1.2 255.255.255.252
-no shutdown
-exit
 
-interface se1/1
-description R2 --> R3
-ip address 10.2.2.1 255.255.255.252
-clock rate 128000
-no shutdown
-exit
-end
-
-r3:
-en
-conf t
-hostname R3
-
-interface Loopback0
-description R3 LAN
-ip address 192.168.3.1 255.255.255.0
-no shutdown
-exit
-
-interface se1/1
-description R3 --> R2
-ip address 10.2.2.2 255.255.255.252
-clock rate 128000
-no shutdown
-exit
-end
-
-R1(config)# ip route 0.0.0.0 0.0.0.0 10.1.1.2
-R3(config)# ip route 0.0.0.0 0.0.0.0 10.2.2.1
-R2(config)# ip route 192.168.1.0 255.255.255.0 10.1.1.1
-R2(config)# ip route 192.168.3.0 255.255.255.0 10.2.2.2
-
-R1# tclsh
-foreach address {
-  192.168.1.1
-  10.1.1.1
-  10.1.1.2
-  10.2.2.1
-  10.2.2.2
-  192.168.3.1
-} {
-  ping $address
-}
-exit
-
-R1(config)# security passwords min-length 10
-R1(config)# enable secret class12345
-R1(config)# line console 0
-R1(config-line)# password ciscoconpass
-R1(config-line)# exec-timeout 5 0
-R1(config-line)# login
-R1(config-line)# logging synchronous
-R1(config-line)# exit
-
-R1(config)# line vty 0 4
-R1(config-line)# password ciscovtypass
-R1(config-line)# exec-timeout 5 0
-R1(config-line)# login
-R1(config-line)# exit
-
-R1(config)# line aux 0
-R1(config-line)# no exec
-R1(config-line)# end
-
-R1(config)# service password-encryption
-R1(config)# banner motd $ Unauthorized access strictly prohibited! $
-
-R3(config)# security passwords min-length 10
-R3(config)# enable secret class12345
-R3(config)# line console 0
-R3(config-line)# password ciscoconpass
-R3(config-line)# exec-timeout 5 0
-R3(config-line)# login
-R3(config-line)# logging synchronous
-R3(config-line)# exit
-R3(config)# line vty 0 4
-R3(config-line)# password ciscovtypass
-R3(config-line)# exec-timeout 5 0
-R3(config-line)# login
-R3(config-line)# exit
-R3(config)# line aux 0
-R3(config-line)# no exec
-R3(config-line)# end
-R3(config)# service password-encryption
-R3(config)# banner motd $ Unauthorized access strictly prohibited! $
-
-R1(config)# username JR-ADMIN secret class12345
-R1(config)# username ADMIN secret class54321
-
-R1(config)# line console 0
-R1(config-line)# login local
-R1(config-line)# exit
-R1(config)# line vty 0 4
-R1(config-line)# login local
-R1(config-line)# end
-
-R3(config)# username JR-ADMIN secret class12345
-R3(config)# username ADMIN secret class54321
-R3(config)# line console 0
-R3(config-line)# login local
-R3(config-line)# exit
-R3(config)# line vty 0 4
-R3(config-line)# login local
-R3(config-line)# end
-
-R1(config)# ip domain-name ccnasecurity.com
-R1(config)# crypto key generate rsa general-keys modulus 1024
-R1(config)# ip ssh version 2
-R1(config)# line vty 0 4
-R1(config-line)# transport input ssh
-R1(config-line)# end
-
-R1# show ip ssh
-
-R3(config)# ip domain-name ccnasecurity.com
-R3(config)# crypto key generate rsa general-keys modulus 1024
-R3(config)# ip ssh version 2
-R3(config)# line vty 0 4
-R3(config-line)# transport input ssh
-R3(config-line)# end
-
-R1# ssh -l ADMIN 10.2.2.2
 
 `;
 
-var text6 = `
-R1:
-en
-conf t
-hostname R1
+        var text6 = `
+import numpy as np
+import skfuzzy as fuzz
+from skfuzzy import control as ctrl
 
-interface Loopback1
-description R1 LAN
-ip address 192.168.1.1 255.255.255.0
-exit
+quality = ctrl.Antecedent(np.arange(0, 11, 1), 'quality')
+service = ctrl.Antecedent(np.arange(0, 11, 1), 'service')
+tip = ctrl.Consequent(np.arange(0, 26, 1), 'tip')
 
-interface Serial1/0
-description R1 --> R2
-ip address 172.16.12.1 255.255.255.248
-clock rate 128000
-bandwidth 128
-no shutdown
-exit
+quality.automf(3)
+service.automf(3)
 
-interface Serial1/1
-description R1 --> R3
-ip address 172.16.13.1 255.255.255.248
-bandwidth 64
-no shutdown
-exit
-end
+tip['low'] = fuzz.trimf(tip.universe, [0, 0, 13])
+tip['medium'] = fuzz.trimf(tip.universe, [0, 13, 25])
+tip['high'] = fuzz.trimf(tip.universe, [13, 25, 25])
 
-r2:
-en
-conf t
-hostname R2
+quality['average'].view()
+service.view()
+tip.view()
 
-interface Loopback2
-description R2 LAN
-ip address 192.168.2.1 255.255.255.0
-exit
+rule1 = ctrl.Rule(quality['poor'] | service['poor'], tip['low'])
+rule2 = ctrl.Rule(service['average'], tip['medium'])
+rule3 = ctrl.Rule(quality['good'] | service['good'], tip['high'])
 
-interface Serial1/0
-description R2 --> R1
-ip address 172.16.12.2 255.255.255.248
-bandwidth 128
-no shutdown
-exit
+tipping_ctrl = ctrl.ControlSystem([rule1, rule2, rule3])
 
-interface Serial1/1
-description R2 --> R3
-ip address 172.16.23.2 255.255.255.248
-bandwidth 64
-no shutdown
-exit
-end
-
-r3:
-en
-conf t
-hostname R3
-
-interface Loopback3
-description R3 LAN
-ip address 192.168.3.1 255.255.255.0
-exit
-
-interface Serial1/1
-description R3 --> R1
-ip address 172.16.13.3 255.255.255.248
-clock rate 64000
-bandwidth 128
-no shutdown
-exit
-
-interface Serial1/0
-description R3 --> R2
-ip address 172.16.23.3 255.255.255.248
-bandwidth 64
-no shutdown
-exit
-
-interface Serial1/2
-description R3 --> R4
-ip address 172.16.34.3 255.255.255.248
-clock rate 64000
-bandwidth 64
-no shutdown
-exit
-end
-
-r4:
-en
-conf t
-hostname R4
-
-interface Loopback4
-description R4 LAN A
-ip address 192.168.4.1 255.255.255.128
-exit
-
-interface Loopback5
-description R4 LAN B
-ip address 192.168.4.129 255.255.255.128
-no shutdown
-exit
-
-interface Serial1/0
-description R4 --> R3
-ip address 172.16.34.4 255.255.255.248
-bandwidth 64
-no shutdown
-exit
-end
-
-r3:
-show ip interface brief | include up
-show protocols
-show interfaces description | include up    
-
-r1:
-config t
-router eigrp 1
-network 192.168.1.0
-network 172.16.12.0 0.0.0.7
-network 172.16.13.0 0.0.0.7
-no auto-summary
-exit
-
-r2:
-config t
-router eigrp 1
-network 192.168.2.0
-network 172.16.12.0 0.0.0.7
-network 172.16.23.0 0.0.0.7
-no auto-summary
-exit
-
-r3:
-config t
-router eigrp 1
-network 192.168.3.0
-network 172.16.13.0 0.0.0.7
-network 172.16.23.0 0.0.0.7
-network 172.16.34.0 0.0.0.7
-no auto-summary
-exit
-
-r4:
-config t
-router eigrp 1
-network 192.168.4.0
-network 172.16.34.0 0.0.0.7
-no auto-summary
-exit
-
-all: show ip eigrp neighbors
-r1:
-tclsh
-foreach address {
-  172.16.12.1
-  172.16.12.2
-  172.16.13.1
-  172.16.13.3
-  172.16.23.2
-  172.16.23.3
-  172.16.34.3
-  172.16.34.4
-  192.168.1.1
-  192.168.2.1
-  192.168.3.1
-  192.168.4.1
-  192.168.4.129
-} {
-  ping $address
-}
-exit
-
-R1# show ip route | begin Gateway
-R4# traceroute 192.168.1.1 source 192.168.4.1
-R4# traceroute 192.168.1.1 source 192.168.4.129
-R3# show ip route | begin Gateway
-R3# show interfaces serial1/2
-R3# show interfaces serial1/1 | include BW
-R3# show interfaces serial1/0 | include BW
-R3(config)# access-list 101 permit ip 192.168.4.0 0.0.0.127 any
-R3(config)# route-map PBR-ROUTE permit 10
-R3(config-route-map)# match ip address 101
-R3(config-route-map)# set interface Serial1/1
-R3(config-route-map)# exit
-
-R4(config)# interface Loopback4
-R4(config-if)# ip policy route-map PBR-ROUTE
-R4(config-if)# exit
-
-R3# show route-map
-R3# show ip policy
-R4# traceroute 192.168.1.1 source 192.168.4.1
-R4(config)# interface Loopback4
-R4(config-if)# no ip policy route-map PBR-ROUTE
-R4(config-if)# exit
-R4# traceroute 192.168.1.1 source 192.168.4.1
+tipping = ctrl.ControlSystemSimulation(tipping_ctrl)
+tipping.input['quality'] = 6.5
+tipping.input['service'] = 9.8
+tipping.compute()
+print(tipping.output['tip'])
+tip.view(sim = tipping)    
 
 `;
 
 var text7 = `
-pc1:
-ip address 192.168.1.2 255.255.255.0
-gateway 192.168.1.1
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import confusion_matrix
+from sklearn import datasets
+import seaborn as sns
 
-pc2:
-ip address 192.168.2.2 255.255.255.0
-gateway 192.168.2.1
+dataset = pd.read_csv()
+dataset.describe()
+X= dataset.iloc[:, [1, 2, 3, 4]].values
+Y= dataset.iloc[:, 5].values
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.25, random_state =0)
+sc = StandardScaler()
 
-sw1:
-en
-conf t
-hostname SW1
+X_train = sc.fit_transform(X_train)
+X_test = sc.transform(X_test)
+classifier = LogisticRegression(random_state = 0, solver = 'lbfgs', multi_class = 'auto')
+classifier.fit(X_train, Y_train)
 
-! Create VLANs
-vlan 10
-name Sales
-exit
-
-vlan 20
-name HR
-exit
-
-interface FastEthernet0/1
-switchport mode access
-switchport access vlan 10
-exit
-
-interface FastEthernet0/2
-switchport mode access
-switchport access vlan 20
-exit
-int vlan10
-ip add 192.168.1.1 255.255.255.0
-no shutdown
-exit
-int vlan20
-ip add 192.168.2.1 255.255.255.0
-no shutdown
-exit
-exit
-show ip interface
-
-ping 192.168.20.2   # From PC1 to PC2
-ping 192.168.10.2   # From PC2 to PC1
+Y_pred = classifier.predict(X_test)
+probs_y = classifier.predict_proba(X_test)
+cm = confusion_matrix(Y_test, Y_pred)
+print(cm)
+ax = plt.axes()
+df_cm = cm
+sns.heatmap(df_cm, annot = True, annot_kws = {"size" : 30}, fmt = 'd', cmap = 'Reds', ax = ax)
+ax.set_title('Confusion Matrix')
+plt.show()
 
 `;
 
-var text8 = `
-r1:
-config t
-hostname R1
-int lo0
-ip add 1.1.1.1 255.255.255.255
-ip ospf 1 area 0
-int f0/0
-ip add 10.0.0.1 255.255.255.0
-no shut
-ip ospf 1 area 0
+var text8= `
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+import scipy.cluster.hierarchy as shc
+from sklearn.cluster import AgglomerativeClustering
+customer_data = pd.read_csv("")
+customer_data.shape
+customer_data.head()
+data = customer_data.iloc[:, 3:5].values
+plt.figure(figsize = (10, 7))
+plt.title("Customer Dendograms")
+dend = shc.dendrogram(shc.linkage(data, method = 'ward'))
+cluster = AgglomerativeClustering(n_clusters = 5, metric = 'euclidean', linkage = 'ward')
+cluster.fit_predict(data)
+plt.figure(figsize = (10, 7))
+plt.scatter(data[:, 0], data[: ,1], c = cluster.labels_, cmap = 'rainbow')
+plt.show()
 
-r2:
-config t
-hostname R2
-int lo0
-ip add 2.2.2.2 255.255.255.255
-ip ospf 1 area 0
-int f0/0
-ip add 10.0.0.2 255.255.255.0
-no shut
-ip ospf 1 area 0
-int f1/0
-ip add 10.0.1.2 255.255.255.0
-no shut
-ip ospf 1 area 0
-
-r3:
-config t
-hostname R3
-int lo0
-ip add 3.3.3.3 255.255.255.255
-ip ospf 1 area 0
-int f0/0
-ip add 10.0.1.3 255.255.255.0
-no shut
-ip ospf 1 area 0
-
-r1:
-config t
-router ospf 1
-mpls ldp autoconfig
-
-r2:
-exit
-router ospf 1
-mpls ldp autoconfig
-
-r3:
-exit
-router ospf 1
-mpls ldp autoconfig
-
-r1:
-config t
-router bgp 1
-neighbor 3.3.3.3 remote-as 1
-neighbor 3.3.3.3 update-source Loopback0
-no auto-summary
-address-family vpnv4
-neighbor 3.3.3.3 activate
-
-r3:
-config t
-router bgp 1
-neighbor 1.1.1.1 remote-as 1
-neighbor 1.1.1.1 update-source Loopback0
-no auto-summary
-address-family vpnv4
-neighbor 1.1.1.1 activate
-
-R1#sh bgp vpnv4 unicast all summary
-
-r4:
-config t
-int lo0
-ip add 4.4.4.4 255.255.255.255
-ip ospf 2 area 2
-int f0/0
-ip add 192.168.1.4 255.255.255.0
-ip ospf 2 area 2
-no shut
-
-r1:
-config t
-int f1/0
-ip add 192.168.1.1 255.255.255.0
-no shut
-exit
-ip vrf RED
-rd 4:4
-route-target both 4:4
-int f1/0
-ip vrf forwarding RED
-ip address 192.168.1.1 255.255.255.0
-int f1/0
-ip ospf 2 area 2
-R1#sh ip route vrf RED
-
-r6:
-config t
-hostname R6
-int lo0
-ip add 6.6.6.6 255.255.255.255
-ip ospf 2 area 2
-int f0/0
-ip add 192.168.2.6 255.255.255.0
-ip ospf 2 area 2
-no shut
-
-r1:
-config t
-router bgp 1
-address-family ipv4 vrf RED
-redistribute ospf 2
-
-r3:
-config t
-router bgp 1
-address-family ipv4 vrf RED
-redistribute ospf 2
-
-r1:
-config t
-router ospf 2
-redistribute bgp 1 subnets
-
-r3:
-config t
-router ospf 2
-redistribute bgp 1 subnets
-
-R4#sh ip route
-R6#sh ip route
-R4#ping 6.6.6.6
-R4#trace 6.6.6.6
 
 `;
 
-var text9 = `
-r1:
-enable
-configure terminal
-hostname R1
+var text9= `
+from numpy import where
+from sklearn.datasets import make_classification
+import matplotlib.pyplot as plt
+X, Y = make_classification(n_samples = 1000, n_features = 2, n_informative = 2, n_redundant = 0, n_clusters_per_class = 1, random_state = 4)
 
-! Configure Serial Interfaces
-interface Serial2/0
-ip address 10.0.0.1 255.255.255.0
-no shutdown
-exit
-
-interface Serial2/1
-ip address 10.0.1.1 255.255.255.0
-no shutdown
-exit
-
-! Configure Ethernet Interface for PC1
-interface FastEthernet0/0
-ip address 192.168.1.1 255.255.255.0
-no shutdown
-exit
-exit
-write memory
-
-R2:
-enable
-configure terminal
-hostname R2
-
-! Configure Serial Interfaces
-interface Serial2/0
-ip address 10.0.0.2 255.255.255.0
-no shutdown
-exit
-
-interface Serial2/1
-ip address 10.0.2.1 255.255.255.0
-no shutdown
-exit
-
-! Configure Ethernet Interface for PC2
-interface FastEthernet0/0
-ip address 192.168.2.1 255.255.255.0
-no shutdown
-exit
-
-exit
-write memory
-
-R3:
-enable
-configure terminal
-hostname R3
-
-! Configure Serial Interfaces
-interface Serial2/0
-ip address 10.0.1.2 255.255.255.0
-no shutdown
-exit
-
-interface Serial2/1
-ip address 10.0.3.1 255.255.255.0
-no shutdown
-exit
-
-! Configure Ethernet Interface for PC3
-interface FastEthernet0/0
-ip address 192.168.3.1 255.255.255.0
-no shutdown
-exit
-
-exit
-write memory
-
-R4:
-enable
-configure terminal
-hostname R4
-
-! Configure Serial Interfaces
-interface Serial2/0
-ip address 10.0.2.2 255.255.255.0
-no shutdown
-exit
-
-interface Serial2/1
-ip address 10.0.4.1 255.255.255.0
-no shutdown
-exit
-
-! Configure Ethernet Interface for PC4
-interface FastEthernet0/0
-ip address 192.168.4.1 255.255.255.0
-no shutdown
-exit
-
-exit
-write memory
-
-R5:
-enable
-configure terminal
-hostname R5
-
-! Configure Serial Interface
-interface Serial2/0
-ip address 10.0.3.2 255.255.255.0
-no shutdown
-exit
-
-interface Serial2/1
-ip address 10.0.4.2 255.255.255.0
-no shutdown
-exit
-
-! Configure Ethernet Interface for PC5
-interface FastEthernet0/0
-ip address 192.168.5.1 255.255.255.0
-no shutdown
-exit
-
-exit
-write memory
-
-R1:
-ip route 192.168.2.0 255.255.255.0 10.0.0.2
-ip route 192.168.3.0 255.255.255.0 10.0.1.2
-ip route 192.168.4.0 255.255.255.0 10.0.0.2
-ip route 192.168.5.0 255.255.255.0 10.0.1.2
-
-r2:
-ip route 192.168.1.0 255.255.255.0 10.0.0.1
-ip route 192.168.3.0 255.255.255.0 10.0.2.2
-ip route 192.168.4.0 255.255.255.0 10.0.2.2
-ip route 192.168.5.0 255.255.255.0 10.0.2.2
-
-r3:
-ip route 192.168.1.0 255.255.255.0 10.0.1.1
-ip route 192.168.2.0 255.255.255.0 10.0.2.1
-ip route 192.168.4.0 255.255.255.0 10.0.3.2
-ip route 192.168.5.0 255.255.255.0 10.0.3.2
-
-r4:
-ip route 192.168.1.0 255.255.255.0 10.0.2.1
-ip route 192.168.2.0 255.255.255.0 10.0.2.1
-ip route 192.168.3.0 255.255.255.0 10.0.3.1
-ip route 192.168.5.0 255.255.255.0 10.0.4.2
-
-r5:
-ip route 192.168.1.0 255.255.255.0 10.0.3.1
-ip route 192.168.2.0 255.255.255.0 10.0.4.1
-ip route 192.168.3.0 255.255.255.0 10.0.3.1
-ip route 192.168.4.0 255.255.255.0 10.0.4.1
-
-r1 pc1:
-ip address 192.168.1.100 255.255.255.0
-gateway 192.168.1.1
-
-r2 pc2:
-ip address 192.168.2.100 255.255.255.0
-gateway 192.168.2.1
-
-pc3 r3:
-ip address 192.168.3.100 255.255.255.0
-gateway 192.168.3.1
-
-pc4 r4:
-ip address 192.168.4.100 255.255.255.0
-gateway 192.168.4.1
-
-pc5 r5:
-ip address 192.168.5.100 255.255.255.0
-gateway 192.168.5.1
-
+for class_value in range(2):
+    row_ix = where(Y == class_value)
+    plt.scatter(X[row_ix, 0], X[row_ix, 1], label = f'Class {class_value}')
+plt.show()
 `;
-        function copyText(text, name) {
-            navigator.clipboard.writeText(text).then(function () {
-                document.getElementById('copiedMsg').innerHTML = `Copied: ${name}`;
-            }).catch(function (err) {
-                console.error('Unable to copy text', err);
-            });
-        }
-    </script>
+
+
+
+
+
+
+
+
+
+function copyText(text) {
+    navigator.clipboard.writeText(text).then(function () {
+        document.getElementById('copiedMsg').innerHTML = "Text Copied"
+    }).catch(function (err) {
+        console.error('Unable to copy text', err);
+    });
+}
+</script>
 
 </body>
+
 </html>
