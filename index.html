@@ -121,10 +121,7 @@ for i in range(5):
 </textarea>
     <button onclick="copyToClipboard('text3', this)">Dnn binary classification task</button>
 
-    <textarea id="text4" readonly>
-
-</textarea>
-    <button onclick="copyToClipboard('text4', this)">Multiclass classification and class prediction</button>
+    <textarea id="text114" readonly>
 import numpy as np
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
@@ -175,6 +172,9 @@ prediction = model.predict(new_sample_scaled)
 
 print("Class Probabilities:", prediction)
 print("Predicted Class:", lb.inverse_transform(prediction))
+</textarea>
+    <button onclick="copyToClipboard('text114', this)">Multiclass classification and class prediction</button>
+
 
 
 <textarea id="text4" readonly>
@@ -728,5 +728,6 @@ plt.show()
     </script>
 </body>
 </html>
+
 
 
