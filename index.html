@@ -7,696 +7,105 @@
 </head>
 <body>
     <textarea id="text1" readonly>
-#pip install nltk 
-#pip install gtts 
-#pip install Speech Recognition pydub -- Ye 3 libraries hai install krke neeche ke code run
+import tensorflow as tf
 
-from gtts import gTTS
-import os
-print("Nisha Gupta")
-f = open('D:/Nisha.txt', 'r')
-x = f.read()
-f.close()
-language = 'en'
-audio = gTTS(text=x, lang=language)
-audio.save('D:/wishes.mp3')
-('start D:/wishes.mp3')
+print("Matrix Multiplication Demo")
+
+# Define Matrix X (2x3)
+x = tf.constant([[1, 2, 3],
+                 [4, 5, 6]], dtype=tf.float32)
+print("Matrix X:\n", x)
+
+# Define Matrix Y (3x2)
+y = tf.constant([[7, 8],
+                 [9, 10],
+                 [11, 12]], dtype=tf.float32)
+print("Matrix Y:\n", y)
+
+# Perform Matrix Multiplication
+z = tf.matmul(x, y)
+print("Product (X x Y):\n", z)
+
+# Define Matrix A (2x2) for Eigenvalues & Eigenvectors
+A = tf.constant([[1, 2],
+                 [5, 4]], dtype=tf.float32)
+print("\nMatrix A:\n", A)
+
+# Find Eigenvalues and Eigenvectors
+e_vals, e_vecs = tf.linalg.eigh(A)
+
+print("\nEigenvalues:\n", e_vals)
+print("\nEigenvectors:\n", e_vecs)
+
 
 </textarea>
-    <button onclick="copyToClipboard('text1', this)">Text2Speech</button>
+    <button onclick="copyToClipboard('text1', this)">Matrixmultiplication and eigen</button>
 
     <textarea id="text2" readonly>
-import speech_recognition as sr
-filename = 'C:/Users/Administrator/Downloads/I love mumbai.wav'
-r = sr.Recognizer()
-with sr.AudioFile(filename) as source:
-    audio = r.record(source)
-text = r.recognize_google(audio)
-print(text)
-print("Speech to text converted successfully")
-print("Nisha Gupta")
+
 
 </textarea>
-    <button onclick="copyToClipboard('text2', this)">Audio2Text</button>
+    <button onclick="copyToClipboard('text2', this)">XOR problem</button>
 
 <textarea id="text3" readonly>
-import nltk
-from nltk.corpus import brown, inaugural, reuters, udhr
-nltk.download('brown')
-nltk.download('inaugural')
-nltk.download('reuters')
-nltk.download('udhr')
-print("Brown Categories:", brown.categories())
-print("Sample words from 'news':", brown.words(categories='news')[:10])
-print("Sample Sentences:", brown.sents(categories='news')[:2])
-print("Inaugural fileids:", inaugural.fileids())
-print("Words from 2009 Obama speech:", inaugural.words('2009-Obama.txt')[:10])
-print("Reuters Categories:", reuters.categories())
-print("words in 'training/9865':", reuters.words('training/9865')[:10])
-print("UDHR File IDs:", udhr.fileids())
-print("Words in English version:", udhr.words('English-Latin1')[:10])
-print("04_Nisha Gupta")
 
 </textarea>
-    <button onclick="copyToClipboard('text3', this)">StudyCorpus</button>
+    <button onclick="copyToClipboard('text3', this)">Multiclass classification and class prediction</button>
 
 <textarea id="text4" readonly>
-#Code (Plaintext):
-from nltk.corpus import PlaintextCorpusReader
-corpus_root = 'nlp prac'
-my_corpus = PlaintextCorpusReader(corpus_root, '.*')
-print(my_corpus.fileids())
-print(my_corpus.words('sample.txt'))
-print("04_Nisha Gupta")
 
-#Categorical
-from nltk.corpus import CategorizedPlaintextCorpusReader
-corpus_root = 'nlp prac'
-cat_corpus = CategorizedPlaintextCorpusReader(
-    corpus_root,
-    r'.*\.txt',
-    cat_pattern=r'(\w+)*'
-)
-print(cat_corpus.categories())
-print(cat_corpus.words(categories='sports'))
-print("04_Nisha Gupta")
 
 </textarea>
-    <button onclick="copyToClipboard('text4', this)">Create&Use Corpora</button>
+    <button onclick="copyToClipboard('text4', this)">Classification and probability prediction</button>
 
 <textarea id="text5" readonly>
-import nltk
-from nltk.corpus import wordnet
-nltk.download('wordnet')
-def practical_2C():
-    print(f"\nLemma names for 'car.n.01': {wordnet.synset('car.n.01').lemma_names()}")
-    printer = wordnet.synset('printer.n.03')
-    hyponyms = sorted({lemma.name() for syn in printer.hyponyms() for lemma in syn.lemmas()})
-    print(f"\nHyponyms of 'printer': {hyponyms}")
-    hypernyms = sorted({lemma.name() for syn in printer.hypernyms() for lemma in syn.lemmas()})
-    print(f"\nHypernyms of 'printer': {hypernyms}")
-    entailments = [syn.name() for syn in wordnet.synset('eat.v.01').entailments()]
-    print(f"\nEntailments of 'eat': {entailments}"
-practical_3b()
-print("04_Nisha Gupta")
+
 
 </textarea>
-    <button onclick="copyToClipboard('text5', this)">Studyof Tagged Corpora CFD</button>
+    <button onclick="copyToClipboard('text5', this)">Linear regression and value prediction. </button>
 
 <textarea id="text6" readonly>
-from collections import Counter
-from nltk.corpus import brown
-tags = [tag for (word, tag) in brown.tagged_words()]
-noun_tags = [tag for tag in tags if tag.startswith('NN')]
-tag_counts = Counter(noun_tags)
-print("Most frequent noun tags:", tag_counts.most_common())
-print("04_Nisha Gupta")
+
 
 </textarea>
-    <button onclick="copyToClipboard('text6', this)">most frequent noun tags</button>
+    <button onclick="copyToClipboard('text6', this)">Regression KFold cross validation.</button>
 
 <textarea id="text7" readonly>
 
-from nltk.corpus import brown
-words = ['apple', 'banana', 'cat']
-word_properties = {word: len(word) for word in words}
-print("Word properties (lengths):", word_properties)
-pos_mapping = {word: tag for (word, tag) in brown.tagged_words()[:10]}
-print("Word to POS mapping:", pos_mapping)
-print("04_Nisha Gupta")
+
 
 </textarea>
-    <button onclick="copyToClipboard('text7', this)">map words to prop</button>
+    <button onclick="copyToClipboard('text7', this)">multiclass classification using KFold cross validation</button>
 
 <textarea id="text8" readonly>
-from nltk.tag import DefaultTagger, RegexpTagger, UnigramTagger
-from nltk.corpus import treebank
-import nltk
-nltk.download('treebank')
-default_tagger = DefaultTagger('NN')
-print(default_tagger.tag(['Hello', 'world']))
-patterns = [
-    (r'.*ing$', 'VBG'),
-    (r'.*ed$', 'VBD'),
-    (r'.*s$', 'NNS'),
-    (r'^-?[0-9]+$', 'CD'),
-    (r'.*', 'NN')
-]
-regex_tagger = RegexpTagger(patterns)
-print(regex_tagger.tag(['working', 'played', 'dogs', '2023']))
-train_data = treebank.tagged_sents()[:3000]
-unigram_tagger = UnigramTagger(train_data)
-print(unigram_tagger.tag(['He', 'is', 'eating']))
-print("04_Nisha Gupta")
+
 
 </textarea>
-    <button onclick="copyToClipboard('text8', this)">Default, RegEx, Unigram tagger</button>
+    <button onclick="copyToClipboard('text8', this)">overfitting in binary classification</button>
 
 <textarea id="text9" readonly>
-from nltk.corpus import words
-import nltk
-nltk.download('words')
-wordlist = set(words.words())
-def word_break_score(text):
-    n = len(text)
-    results = []
-    def backtrack(index, path, score):
-        if index == n:
-            results.append((path, score))
-            return
-        for end in range(index + 1, n + 1):
-            word = text[index:end]
-            if word in wordlist:
-                backtrack(end, path + [word], score + 1)
-    backtrack(0, [], 0)
-    return sorted(results, key=lambda x: -x[1])
-text = "helloworldpython"
-print("Segmented results with scores:")
-for words_found, score in word_break_score(text):
-    print(f"{' '.join(words_found)} -> Score: {score}")
-print("04_Nisha Gupta")
 
 </textarea>
-    <button onclick="copyToClipboard('text9', this)">find different word without space and score of words</button>
+    <button onclick="copyToClipboard('text9', this)">RNN sequence analysis</button>
 
 <textarea id="text10" readonly>
-import nltk
-from nltk.corpus import wordnet
-nltk.download('wordnet')
-def practical_3a():
-    print(f"\nLemma names for 'car.n.01': {wordnet.synset('car.n.01').lemma_names()}")
-    printer = wordnet.synset('printer.n.03')
-    hyponyms = sorted({lemma.name() for syn in printer.hyponyms() for lemma in syn.lemmas()})
-    print(f"\nHyponyms of 'printer': {hyponyms}")
-    hypernyms = sorted({lemma.name() for syn in printer.hypernyms() for lemma in syn.lemmas()})
-    print(f"\nHypernyms of 'printer': {hypernyms}")
-    entailments = [syn.name() for syn in wordnet.synset('eat.v.01').entailments()]
-    print(f"\nEntailments of 'eat': {entailments}")
-practical_3a()
-print("04_Nisha Gupta")
 
 </textarea>
-    <button onclick="copyToClipboard('text10', this)">Wordnet Divct - synsets, definitions, examples, antonyms</button>
+    <button onclick="copyToClipboard('text10', this)">encoding and decoding of images</button>
 
 <textarea id="text11" readonly>
-import nltk
-from nltk.corpus import wordnet
-nltk.download('wordnet')
-def practical_3b():
-    print(f"\nLemma names for 'car.n.01': {wordnet.synset('car.n.01').lemma_names()}")
-    printer = wordnet.synset('printer.n.03')
-    hyponyms = sorted({lemma.name() for syn in printer.hyponyms() for lemma in syn.lemmas()})
-    print(f"\nHyponyms of 'printer': {hyponyms}")
-    hypernyms = sorted({lemma.name() for syn in printer.hypernyms() for lemma in syn.lemmas()})
-    print(f"\nHypernyms of 'printer': {hypernyms}")
-    entailments = [syn.name() for syn in wordnet.synset('eat.v.01').entailments()]
-    print(f"\nEntailments of 'eat': {entailments}")
-practical_3b()
-print("04_Nisha Gupta")
+
 
 </textarea>
-    <button onclick="copyToClipboard('text11', this)">lemmas,hyponyms, entailment</button>
+    <button onclick="copyToClipboard('text11', this)">CNN predict numbers from number images</button>
 
 <textarea id="text12" readonly>
-import nltk
-from nltk.corpus import wordnet
-nltk.download('wordnet')
-def _three_c():
-    synonyms = []
-    antonyms = []
-    for syn in wordnet.synsets("active"):
-        for l in syn.lemmas():
-            synonyms.append(l.name())
-            if l.antonyms():
-                antonyms.append(l.antonyms()[0].name())
-    print(f"\nSynonyms:\n{set(synonyms)}")
-    print(f"\nAntonyms:\n{set(antonyms)}")
-_three_c()
+
 
 </textarea>
-    <button onclick="copyToClipboard('text12', this)">find synony & antony</button>
+    <button onclick="copyToClipboard('text12', this)">Denoising of image using Autoencoder.</button>
 
-<textarea id="text13" readonly>
-from nltk.corpus import wordnet
-def _three_d(n1, n2):
-    w1, w2 = wordnet.synset(n1), wordnet.synset(n2)
-    print(f"Similarity between {n1} and {n2}: {w1.wup_similarity(w2) * 100:.2f}%")
-for pair in [('puma.n.01', 'cat.n.01'), ('bike.n.01', 'wheel.n.01'), ('fruit.n.01', 'flower.n.01')]:
-    _three_d(*pair)
 
-</textarea>
-    <button onclick="copyToClipboard('text13', this)">compare 2 nouns</button>
-
-<textarea id="text14" readonly>
-!pip install gensim
-import nltk
-import spacy
-from nltk.corpus import stopwords
-from gensim.parsing.preprocessing import STOPWORDS as GENSIM_STOPWORDS
-from spacy.lang.en.stop_words import STOP_WORDS
-nltk.download('stopwords', quiet=True)
-word = 'newword'
-# NLTK
-nltk_sw = stopwords.words('english')
-if word not in nltk_sw:
-    nltk_sw.append(word)
-if word in nltk_sw:
-    nltk_sw.remove(word)
-print(f'NLTK - "{word}" in stopwords:', word in nltk_sw)
-# Gensim
-gensim_sw = GENSIM_STOPWORDS.union({word})
-gensim_sw = gensim_sw.difference({'a'})
-print(f'Gensim - "{word}" in stopwords:', word in gensim_sw)
-print(f'Gensim - "a" in stopwords:', 'a' in gensim_sw)
-# SpaCy
-try:
-    nlp = spacy.load('en_core_web_sm')
-except:
-    import os
-    os.system('python -m spacy download en_core_web_sm')
-    nlp = spacy.load('en_core_web_sm')
-STOP_WORDS.add(word)
-STOP_WORDS.remove(word)
-print(f'SpaCy - "{word}" in stopwords:', word in STOP_WORDS)
-print("05_Roshni Gupta")
-
-</textarea>
-    <button onclick="copyToClipboard('text14', this)">handling stop words</button>
-
-<textarea id="text15" readonly>
-#split
-content = "I am Nisha Gupta studying in MSC IT and roll no is 04"
-a = content.split()
-print("04_Nisha Gupta")
-print(a)
-
-#regex
-import re
-content = "I am Nisha Gupta studying in MSC IT and roll no is 04"
-a = content.split()
-token = re.findall(r"[\w']+", content)
-print("04_Nisha Gupta")
-print(a)
-print(token)
-
-#using nltk
-import nltk
-nltk.download('punkt')
-from nltk.tokenize import word_tokenize
-content = "I am Nisha Gupta studying in MSC IT and roll no is 04"
-word = word_tokenize(content)
-print("04_Nisha Gupta")
-print(word)
-
-#spaCy
-from spacy.lang.en import English
-nlp = English()
-content = "I am Nisha Gupta in MSC IT and roll no 04"
-my_doc = nlp(content)
-token_list = []
-for token in my_doc:
-    token_list.append(token)
-print(token_list)
-
-#keras
-from tensorflow.keras.preprocessing.text import text_to_word_sequence
-content = "I am Nisha Gupta studying in mscit part II and my roll no.05"
-result = text_to_word_sequence(content)
-print(result)
-
-#gensim
-from gensim.utils import tokenize
-content = "I am Nisha Gupta studying in mscit part II and my roll no.05"
-print(list(tokenize(content)))
-
-</textarea>
-    <button onclick="copyToClipboard('text15', this)">tokenization-</button>
-
-<textarea id="text16" readonly>
-#install - !pip install -q indic-nlp-library sentence-transformers torch langdetect polyglot pyicu morfessor pycld2 
-
-#word tokenization in hindi
-from indicnlp.tokenize import indic_tokenize
-
-hindi_text = "मैं स्कूल जा रहा हूँ|"
-tokens = list(indic_tokenize.trivial_tokenize(hindi_text, lang='hi'))
-print("Tokenized Words:", tokens)
-
-#generate similar sentence
-from sentence_transformers import SentenceTransformer, util
-import torch
-
-model = SentenceTransformer('sentence-transformers/distiluse-base-multilingual-cased-v1')
-
-text = "मैं स्कूल जा रहा हूँ"
-sentence_pool = [
-    "मैं कॉलेज जा रहा हूँ",
-    "मैं बाज़ार जा रहा हूँ",
-    "मैं ऑफिस जा रहा हूँ",
-    "मैं घर जा रहा हूँ",
-    "मैं पार्क जा रहा हूँ",
-    "मैं बाजार जा रहा हूँ",
-    "मैं ट्यूशन जा रहा हूँ",
-    "मैं पढ़ाई कर रहा हूँ",
-    "मैं सो रहा हूँ",
-    "मैं स्कूल जा रही हूँ"
-]
-
-emb1 = model.encode(text, convert_to_tensor=True)
-emb2 = model.encode(sentence_pool, convert_to_tensor=True)
-
-scores = util.cos_sim(emb1, emb2)[0]
-top = torch.topk(scores, k=3)
-
-print("Input:", text)
-print("Top 3 Similar Sentences:")
-for score, idx in zip(top[0], top[1]):
-    print(f"- {sentence_pool[idx]} (score: {score:.4f})")
-
-#identigy the indian language
-!pip install langdetect
-from langdetect import detect
-
-lang_code_map = {
-    'hi': 'Hindi',
-    'bn': 'Bengali',
-    'te': 'Telugu',
-    'en': 'English',
-    'ta': 'Tamil',
-    'gu': 'Gujarati',
-    'mr': 'Marathi',
-    'pa': 'Punjabi',
-    'ur': 'Urdu',
-    'ml': 'Malayalam',
-    'kn': 'Kannada',
-    'or': 'Odia',
-    'as': 'Assamese'
-}
-
-texts = [
-    "मैं हिंदी बोलता हूँ।",
-    "আমি বাংলায় কথা বলি।",
-    "నేను తెలుగు మాట్లాడతాను.",
-    "I speak English."
-]
-
-print("Language Detection (langdetect):")
-for t in texts:
-    code = detect(t)
-    name = lang_code_map.get(code, "Unknown")
-    print(f"-- {t}\n Code: {code} | Language: {name}\n")
-
-</textarea>
-    <button onclick="copyToClipboard('text16', this)">indian lang - token,similar sent,identify</button>
-
-<textarea id="text17" readonly>
-import nltk
-from nltk import pos_tag
-from nltk import RegexpParser
-nltk.download('averaged_perceptron_tagger')
-nltk.download('words')
-nltk.download('punkt')
-nltk.download('maxent_ne_chunker')
-text = "This is Practical No.06".split()
-print("After Split: ", text)
-tokens_tag = pos_tag(text)
-print("After Token: ", tokens_tag)
-patterns = """mychunk:{<NN.?>*<VBD.?>*<JJ.?>*<CC.?>}"""
-chunker = RegexpParser(patterns)
-print("After Regex: ", chunker)
-output = chunker.parse(tokens_tag)
-print(output)
-print("04_Nisha Gupta")
-
-</textarea>
-    <button onclick="copyToClipboard('text17', this)">Pos tagging and chunking</button>
-
-<textarea id="text18" readonly>
-import nltk
-import spacy
-from spacy import displacy
-from collections import Counter
-import en_core_web_sm
-nlp = en_core_web_sm.load()
-ex = nlp("""European authorities fined Google a record $5.1 billion on Wedneshday 
-for abusing its power in the mobile phone market ordered the company to aler its practices""")
-print([(X.text, X.label_) for X in ex.ents])
-
-</textarea>
-    <button onclick="copyToClipboard('text18', this)">NER recognition</button>
-
-<textarea id="text19" readonly>
-import nltk
-nltk.download('punkt')
-nltk.download('averaged_perceptron_tagger')
-nltk.download('maxent_ne_chunker')
-nltk.download('words')
-import matplotlib.pyplot as plt
-sentence = 'Peterson first suggested the name "opensource" at Palo Alto , California'
-words = nltk.word_tokenize(sentence)
-pos_tagged = nltk.pos_tag(words)
-ne_tagged = nltk.ne_chunk(pos_tagged)
-print("NE tagged text: \n", ne_tagged, "\n")
-print("Recognized named entities: ")
-for ne in ne_tagged:
-    if hasattr(ne, "label"):
-        print(ne.label(), ne[0:])
-ne_tagged.pretty_print()
-print("04 - Nisha Gupta")
-
-</textarea>
-    <button onclick="copyToClipboard('text19', this)">NER with diag using NLTK corpus-treebank</button>
-
-<textarea id="text20" readonly>
-import nltk
-print("04_Nisha Gupta")
-grammar1 = nltk.CFG.fromstring("""
-S -> NP VP
-VP -> V NP | V NP PP
-PP -> P NP
-V -> "saw" | "ate" | "walked"
-NP -> "John" | "Roshni" | "Nisha" | Det N | Det N PP
-Det -> "a" | "an" | "the" | "my"
-N -> "man" | "dog" | "cat" | "telescope" | "park"
-P -> "in" | "on" | "by" | "with"
-""")
-sent = "Roshni saw a dog".split()
-rd_parser = nltk.RecursiveDescentParser(grammar1)
-for tree in rd_parser.parse(sent):
-    print(tree)
-
-</textarea>
-    <button onclick="copyToClipboard('text20', this)">define grammar, analyze sent using nltk</button>
-
-<textarea id="text21" readonly>
-def FA(s):
-    if len(s) < 3:
-        return "Rejected"
-    if s[0] == '1':
-        if s[1] == '0':
-            if s[2] == '1':
-                for i in range(3, len(s)):
-                    if s[i] != '1':
-                        return "Rejected"
-                return "Accepted"
-            return "Rejected"
-        return "Rejected"
-    return "Rejected"
-inputs = ['1', '10101', '101', '10111', '101101', ""]
-for string in inputs:
-    print(f"{string} -> {FA(string)}")
-
-#print("FA (a+b)*bba")
-def FA(s):
-    size = 0
-    for i in s:
-        if i == 'a' or i == 'b':
-            size += 1
-        else:
-            return "Rejected"
-    if size >= 3:
-        if s[size-3] == 'b':
-            if s[size-2] == 'b':
-                if s[size-1] == 'a':
-                    return "Accepted"
-                return "Rejected"
-            return "Rejected"
-        return "Rejected"
-    return "Rejected"
-inputs = ['bba', 'ababbba', 'abba', 'abb', 'baba', 'bbb', 'aba']
-for i in inputs:
-    print(f"{i} -> {FA(i)}")
-
-</textarea>
-    <button onclick="copyToClipboard('text21', this)">accept input with regex fa</button>
-
-<textarea id="text22" readonly>
-import nltk
-print("04_Nisha Gupta")
-grammar = nltk.CFG.fromstring("""
-  S -> NP VP
-  VP -> V NP | V NP PP
-  PP -> P NP
-  V -> "saw" | "ate" | "walked"
-  NP -> "John" | "Roshni" | "Nisha" | Det N | Det N PP
-  Det -> "a" | "an" | "the" | "my"
-  N -> "man" | "dog" | "cat" | "telescope" | "park"
-  P -> "in" | "on" | "by" | "with"
-""")
-sent = "Nisha saw a John".split()
-rd_parser = nltk.RecursiveDescentParser(grammar)
-for tree in rd_parser.parse(sent):
-    print(tree)
-    tree.pretty_print()
-print("Shift reduce")
-sr_parse = nltk.ShiftReduceParser(grammar, trace=2)
-sent = 'John saw a dog'.split()
-for tree1 in sr_parse.parse(sent):
-    print(tree1)
-    tree1.pretty_print()
-
-</textarea>
-    <button onclick="copyToClipboard('text22', this)">deductive chart parsing</button>
-
-<textarea id="text23" readonly>
-print('PortStemmer\n04_Nisha Gupta')
-import nltk
-nltk.download('punkt_tab')
-from nltk.stem import PorterStemmer
-from nltk.tokenize import sent_tokenize, word_tokenize
-porter = PorterStemmer()
-terms = ["gene", "genes", "genesis", "genetic", "generic", "general"]
-print("\n1. Performing porter stemming on the words")
-for each_term in terms:
-    print(porter.stem(each_term))
-sentence = "Hey a Nisha Gupta, do you know experiencing new things can be good"
-print("\n2. Performing porter stemming on a sentence")
-words = word_tokenize(sentence, language='english')
-for each_word in words:
-    print(porter.stem(each_word))
-
-</textarea>
-    <button onclick="copyToClipboard('text23', this)">PorterStemmer</button>
-
-<textarea id="text24" readonly>
-print('lancasterStemmer\n04_Nisha Gupta')
-import nltk
-nltk.download('punkt_tab')
-from nltk.stem import LancasterStemmer
-from nltk.tokenize import sent_tokenize, word_tokenize
-lancaster = LancasterStemmer()
-terms = ["gene", "genes", "genesis", "genetic", "generic", "general"]
-print("\n1. Performing lancaster stemming on the words")
-for each_term in terms:
-    print(lancaster.stem(each_term))
-sentence = "Hey a Nisha Gupta, do you know experiencing new things can be good"
-print("\n2. Performing lancaster stemming on a sentence")
-msc_file = open("/content/mscit.txt")
-words = word_tokenize(sentence, language='english')
-my_lines_list = msc_file.readlines()
-for each_word in words:
-    print(lancaster.stem(each_word))
-
-</textarea>
-    <button onclick="copyToClipboard('text24', this)">LancasterStemmer</button>
-
-<textarea id="text25" readonly>
-print('RegexpStemmer\n04_Nisha Gupta')
-import nltk
-nltk.download('punkt_tab')
-from nltk.stem import RegexpStemmer
-from nltk.tokenize import sent_tokenize, word_tokenize
-regexp = RegexpStemmer('ing$|s$|e$|able$|ment$|less$|ly$|ion$', min=4)
-print("\n1. Performing regexp stemming on the words")
-print(regexp.stem('cars'))
-print(regexp.stem('bee'))
-print(regexp.stem('compute'))
-terms = ["gene","genes","genesis","genetic","generic","general",
-         "frictionless","management","flowers","advisable","friction"]
-print("\n2. Performing regexp stemming on a sentence")
-for each_term in terms:
-    print(regexp.stem(each_term))
-
-</textarea>
-    <button onclick="copyToClipboard('text25', this)">RegexpStemmer </button>
-
-<textarea id="text26" readonly>
-print('snowballStemmer\n05_Roshni Gupta')
-import nltk
-nltk.download('punkt_tab')
-from nltk.stem.snowball import SnowballStemmer
-snowball_english = SnowballStemmer("english")
-snowball_dutch = SnowballStemmer("dutch")
-print("\n1. Performing snowball stemming on the words")
-word = snowball_english.stem("Vibing")
-print(word)
-terms = ["gene","genes","genesis","genetic","generic","general",
-         "frictionless","management","flowers","advisable","friction"]
-print("\n2. Performing snowball stemming on a set of english language words")
-for each_term in terms:
-    print(snowball_english.stem(each_term))
-terms2 = ["gene","genes","genesis","genetic","generic","general"]
-print("\n3. Performing snowball stemming on a set of dutch language words")
-for each_term in terms2:
-    print(snowball_dutch.stem(each_term))
-
-</textarea>
-    <button onclick="copyToClipboard('text26', this)">SnowballStemmer</button>
-
-<textarea id="text27" readonly>
-print('WordNetLemmatizer\n04_Nisha Gupta')
-import nltk
-nltk.download('wordnet')
-nltk.download('punkt_tab')
-from nltk.tokenize import word_tokenize
-from nltk.stem import WordNetLemmatizer
-wordnet = WordNetLemmatizer()
-print("\n1. Performing WordNet lemmatization on the words")
-print(wordnet.lemmatize("corpora"))
-print(wordnet.lemmatize("best"))
-print(wordnet.lemmatize("geese"))
-print(wordnet.lemmatize("feet"))
-print(wordnet.lemmatize("cacti"))
-print("\n2. Performing WordNet lemmatization on a set of english language words")
-sentence = "Hey Nisha , do you know change is good sometime!"
-list_words = nltk.word_tokenize(sentence)
-print("\nConverting the sentence into list of words")
-print(list_words)
-final = ''.join([wordnet.lemmatize(each_word, pos='v') for each_word in list_words])
-print("\nAfter applying WordNet lemmatizer, the result is .....")
-print(final)
-
-</textarea>
-    <button onclick="copyToClipboard('text27', this)">WordNetLemmatizer 
-</button>
-
-<textarea id="text28" readonly>
-print('\n04_Nisha Gupta')
-import sklearn
-from sklearn import datasets
-from sklearn.model_selection import train_test_split
-from sklearn.naive_bayes import GaussianNB, MultinomialNB
-from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
-breastcancer = datasets.load_breast_cancer()
-print("Features of breastcancer dataset: ", breastcancer.feature_names)
-print("\nLabels of breastcancer dataset: ", breastcancer.target_names)
-print("\nShape of breastcancer dataset: ", breastcancer.data.shape)
-print("\n")
-R = breastcancer.data
-T = breastcancer.target
-Rtrain, Rtest, Ttrain, Ttest = train_test_split(R, T, test_size=0.2, random_state=0)
-gauss = GaussianNB()
-gauss.fit(Rtrain, Ttrain)
-pred = gauss.predict(Rtest)
-gcr = classification_report(Ttest, pred)
-print("\nClassification Report gaussian:\n", gcr)
-gcm = confusion_matrix(Ttest, pred)
-print("\nConfusion matrix gaussian:\n", gcm)
-accuracy = accuracy_score(Ttest, pred)
-print("\nAccuracy:", accuracy*100)
-
-</textarea>
-    <button onclick="copyToClipboard('text28', this)">Naive Bayes</button>
 
     <script>
         function copyToClipboard(elementId, button) {
@@ -714,3 +123,4 @@ print("\nAccuracy:", accuracy*100)
     </script>
 </body>
 </html>
+
