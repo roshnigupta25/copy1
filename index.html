@@ -42,64 +42,669 @@ print("\nEigenvectors:\n", e_vecs)
     <button onclick="copyToClipboard('text1', this)">Matrixmultiplication and eigen</button>
 
     <textarea id="text2" readonly>
+import numpy as np
+import tensorflow as tf
 
+# Build Model
+model = tf.keras.Sequential([
+    tf.keras.layers.Dense(2, activation='relu', input_dim=2),
+    tf.keras.layers.Dense(1, activation='sigmoid')
+])
+
+# Compile Model
+model.compile(optimizer='adam',
+              loss='binary_crossentropy',
+              metrics=['accuracy'])
+
+model.summary()
+
+# XOR Dataset
+x = np.array([[0., 0.],
+              [0., 1.],
+              [1., 0.],
+              [1., 1.]], dtype=float)
+
+y = np.array([0., 1., 1., 0.], dtype=float)
+
+# Train Model
+model.fit(x, y, epochs=1000, batch_size=4, verbose=0)
+
+# Print Weights
+print("\nWeights After Training:")
+print(model.get_weights())
+
+# Predictions
+print("\nPredictions:")
+print(model.predict(x))
 
 </textarea>
     <button onclick="copyToClipboard('text2', this)">XOR problem</button>
 
 <textarea id="text3" readonly>
+from keras.models import Sequential
+from keras.layers import Dense
+import pandas as pd
+
+# Load Dataset
+dataset = pd.read_csv('/content/sample_data/diabetes.csv')
+print(dataset)
+
+# Split Data
+X = dataset.iloc[:, 0:8]
+Y = dataset.iloc[:, 8]
+
+print(X.shape, Y.shape)
+
+# Build Model
+model = Sequential()
+model.add(Dense(12, input_dim=8, activation='relu'))
+model.add(Dense(8, activation='relu'))
+model.add(Dense(1, activation='sigmoid'))
+
+# Compile Model
+model.compile(loss='binary_crossentropy',
+              optimizer='adam',
+              metrics=['accuracy'])
+
+# Train Model
+model.fit(X, Y, epochs=100, batch_size=10)
+
+# Evaluate Model
+_, accuracy = model.evaluate(X, Y)
+print('Accuracy:', (accuracy * 100))
+
+# Prediction
+prediction = model.predict(X)
+
+for i in range(5):
+    print(X.iloc[i].tolist(), prediction[i], Y.iloc[i])
+</textarea>
+    <button onclick="copyToClipboard('text3', this)">Dnn binary classification task</button>
+
+    <textarea id="text4" readonly>
 
 </textarea>
-    <button onclick="copyToClipboard('text3', this)">Multiclass classification and class prediction</button>
+    <button onclick="copyToClipboard('text4', this)">Multiclass classification and class prediction</button>
+import numpy as np
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler, LabelBinarizer
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+
+# Load Dataset
+iris = load_iris()
+x = iris.data
+y = iris.target
+
+# Convert labels to one-hot encoding
+lb = LabelBinarizer()
+y = lb.fit_transform(y)
+
+# Split dataset
+X_train, X_test, y_train, y_test = train_test_split(
+    x, y, test_size=0.2, random_state=42)
+
+# Feature Scaling
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+
+# Build Model
+model = Sequential()
+model.add(Dense(16, activation='relu', input_shape=(4,)))
+model.add(Dense(12, activation='relu'))
+model.add(Dense(3, activation='softmax'))
+
+# Compile Model
+model.compile(optimizer='adam',
+              loss='categorical_crossentropy',
+              metrics=['accuracy'])
+
+# Train Model
+model.fit(X_train, y_train, epochs=50, batch_size=8, verbose=1)
+
+# Evaluate Model
+loss, accuracy = model.evaluate(X_test, y_test)
+print("Test Accuracy:", accuracy)
+
+# Predict New Sample
+new_sample = np.array([[5.1, 3.5, 1.4, 0.2]])
+new_sample_scaled = scaler.transform(new_sample)
+prediction = model.predict(new_sample_scaled)
+
+print("Class Probabilities:", prediction)
+print("Predicted Class:", lb.inverse_transform(prediction))
+
 
 <textarea id="text4" readonly>
+from keras.models import Sequential
+from keras.layers import Dense
+from sklearn.datasets import make_blobs
+from sklearn.preprocessing import MinMaxScaler
 
+# Generate Dataset
+x, y = make_blobs(n_samples=100, centers=2,
+                  n_features=2, random_state=1)
+
+# Scaling
+scalar = MinMaxScaler()
+x = scalar.fit_transform(x)
+
+# Build Model
+model = Sequential()
+model.add(Dense(4, input_dim=2, activation='relu'))
+model.add(Dense(4, activation='relu'))
+model.add(Dense(1, activation='sigmoid'))
+
+# Compile Model
+model.compile(loss='binary_crossentropy',
+              optimizer='adam',
+              metrics=['accuracy'])
+
+# Train Model
+model.fit(x, y, epochs=500, verbose=0)
+
+# New Predictions
+xnew, yreal = make_blobs(n_samples=3, centers=2,
+                         n_features=2, random_state=1)
+
+xnew = scalar.transform(xnew)
+ynew = model.predict(xnew)
+
+for i in range(len(xnew)):
+    print("X-%s, Predicted-%s, Desired-%s" %
+          (xnew[i], ynew[i], yreal[i]))
 
 </textarea>
     <button onclick="copyToClipboard('text4', this)">Classification and probability prediction</button>
 
 <textarea id="text5" readonly>
 
+from keras.models import Sequential
+from keras.layers import Dense
+from sklearn.datasets import make_regression
+from sklearn.preprocessing import MinMaxScaler
+
+# Generate Regression Dataset
+x, y = make_regression(n_samples=100,
+                       n_features=2,
+                       noise=0.1,
+                       random_state=1)
+
+# Scaling
+scalarx = MinMaxScaler()
+scalary = MinMaxScaler()
+
+x = scalarx.fit_transform(x)
+y = scalary.fit_transform(y.reshape(-1, 1))
+
+# Build Model
+model = Sequential()
+model.add(Dense(4, input_dim=2, activation='relu'))
+model.add(Dense(4, activation='relu'))
+model.add(Dense(1, activation='linear'))
+
+# Compile Model
+model.compile(loss='mse', optimizer='adam')
+
+# Train Model
+model.fit(x, y, epochs=500, batch_size=10, verbose=1)
+
+# Predict New Values
+xnew, _ = make_regression(n_samples=3,
+                          n_features=2,
+                          noise=0.1,
+                          random_state=1)
+
+xnew = scalarx.transform(xnew)
+ynew = model.predict(xnew)
+
+for i in range(len(xnew)):
+    print("X=%s, Predicted (scaled)=%s" % (xnew[i], ynew[i]))
+
+# Convert Back to Original Scale
+y_original = scalary.inverse_transform(ynew)
+print("Actual Predicted Values:", y_original)
 
 </textarea>
     <button onclick="copyToClipboard('text5', this)">Linear regression and value prediction. </button>
 
 <textarea id="text6" readonly>
 
+from keras.models import Sequential
+from keras.layers import Dense
+from sklearn.model_selection import KFold
+import numpy as np
+
+# Load Dataset
+dataset = np.genfromtxt("/content/sample_data/diabetes (1).csv",
+                        delimiter=",")
+
+# Split Data
+x = dataset[:, 0:8]
+y = dataset[:, 8]
+
+# Define KFold
+kfold = KFold(n_splits=5, shuffle=True)
+
+# Create Model
+model = Sequential()
+model.add(Dense(12, input_dim=8, activation='relu'))
+model.add(Dense(8, activation='relu'))
+model.add(Dense(1, activation='sigmoid'))
+
+# Compile Model
+model.compile(loss='binary_crossentropy',
+              optimizer='adam',
+              metrics=['accuracy'])
+
+# Evaluate Model using KFold
+results = kfold.split(x)
+
+for train_index, test_index in results:
+    x_train, x_test = x[train_index], x[test_index]
+    y_train, y_test = y[train_index], y[test_index]
+
+    model.fit(x_train, y_train,
+              epochs=150,
+              batch_size=10,
+              verbose=0)
+
+    _, accuracy = model.evaluate(x_test, y_test)
+    print('Accuracy: %.2f' % (accuracy * 100))
 
 </textarea>
     <button onclick="copyToClipboard('text6', this)">Regression KFold cross validation.</button>
 
 <textarea id="text7" readonly>
+# Import Libraries
+from keras.models import Sequential
+from keras.layers import Dense
+from sklearn.model_selection import train_test_split
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
 
+# Load Dataset
+df = pd.read_csv("/content/sample_data/Flower (1).csv")
 
+print(df.shape)
+print(df.head(10))
+print(df.describe())
+
+# Data Cleaning
+print(df.isnull().sum())
+df.dropna(inplace=True)
+
+# EDA
+sns.set_style('darkgrid')
+
+# Pairplot
+sns.pairplot(df, hue="species")
+plt.show()
+
+# Correlation Heatmap
+corr_matrix = ["sepal_length", "sepal_width",
+               "petal_length", "petal_width"]
+
+sns.heatmap(df[corr_matrix].corr(), annot=True)
+plt.title("Correlation between values")
+plt.show()
+
+# Pie Chart
+typeofiris = df["species"].value_counts()
+
+plt.pie(typeofiris,
+        labels=typeofiris.index,
+        autopct='%1.1f%%',
+        startangle=90,
+        colors=['lightblue', 'lightcoral', 'lightyellow'])
+
+plt.title('Iris species distribution')
+plt.show()
+
+# Data Preparation
+y = pd.get_dummies(df['species'])
+x = df.drop(['species'], axis=1)
+
+# Split Data
+x_train, x_test, y_train, y_test = train_test_split(
+    x, y, test_size=0.3)
+
+# Build Model
+model = Sequential()
+model.add(Dense(4, input_shape=(4,), activation='relu'))
+model.add(Dense(12, activation='sigmoid'))
+model.add(Dense(3, activation='softmax'))
+
+# Compile Model
+model.compile(loss='categorical_crossentropy',
+              optimizer='adam',
+              metrics=['accuracy'])
+
+# Train Model
+model.fit(x_train, y_train,
+          epochs=25,
+          batch_size=3)
+
+# Evaluate Model
+score = model.evaluate(x_test, y_test)
+print("Test Accuracy:", score)
 
 </textarea>
     <button onclick="copyToClipboard('text7', this)">multiclass classification using KFold cross validation</button>
 
 <textarea id="text8" readonly>
+from matplotlib import pyplot as plt
+from sklearn.datasets import make_moons
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.regularizers import l1_l2
 
+# Generate Dataset
+x, y = make_moons(n_samples=100,
+                  noise=0.2,
+                  random_state=1)
+
+# Split Data
+n_train = 30
+trainx, testx = x[:n_train, :], x[n_train:]
+trainy, testy = y[:n_train], y[n_train:]
+
+# Build Model with Regularization
+model = Sequential()
+model.add(Dense(500,
+                input_dim=2,
+                activation='relu',
+                kernel_regularizer=l1_l2(l1=0.001, l2=0.001)))
+
+model.add(Dense(1, activation='sigmoid'))
+
+# Compile Model
+model.compile(loss='binary_crossentropy',
+              optimizer='adam',
+              metrics=['accuracy'])
+
+# Train Model
+history = model.fit(trainx, trainy,
+                    validation_data=(testx, testy),
+                    epochs=1000)
+
+# Plot Accuracy
+plt.plot(history.history['val_accuracy'], label='Test Accuracy')
+plt.legend()
+plt.show()
 
 </textarea>
     <button onclick="copyToClipboard('text8', this)">overfitting in binary classification</button>
 
 <textarea id="text9" readonly>
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import MinMaxScaler
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import LSTM, Dense
+
+# 1. Generate Dummy Stock Data
+np.random.seed(1)
+days = 200
+price = np.cumsum(np.random.randn(days)) + 100
+price = price.reshape(-1, 1)
+
+# 2. Normalize Data
+scaler = MinMaxScaler(feature_range=(0, 1))
+price_scaled = scaler.fit_transform(price)
+
+# 3. Create Sequences
+x = []
+y = []
+sequence_length = 10
+
+for i in range(sequence_length, len(price_scaled)):
+    x.append(price_scaled[i-sequence_length:i])
+    y.append(price_scaled[i])
+
+x = np.array(x)
+y = np.array(y)
+
+# 4. Build LSTM Model
+model = Sequential()
+model.add(LSTM(50, activation='tanh',
+               input_shape=(x.shape[1], 1)))
+model.add(Dense(1))
+
+model.compile(optimizer='adam',
+              loss='mean_squared_error')
+
+# 5. Train Model
+model.fit(x, y, epochs=20,
+          batch_size=16, verbose=1)
+
+# 6. Predict
+predicted_scaled = model.predict(x)
+predicted = scaler.inverse_transform(predicted_scaled)
+actual = scaler.inverse_transform(y)
+
+# 7. Plot Results
+plt.figure(figsize=(10, 5))
+plt.plot(actual, label="Actual Stock Price")
+plt.plot(predicted, label="Predicted Stock Price")
+plt.title("RNN (LSTM) Stock Price Prediction")
+plt.xlabel("Days")
+plt.ylabel("Stock Price")
+plt.legend()
+plt.show()
 
 </textarea>
     <button onclick="copyToClipboard('text9', this)">RNN sequence analysis</button>
 
 <textarea id="text10" readonly>
+import keras
+from keras import layers
+from keras.datasets import mnist
+import numpy as np
+import matplotlib.pyplot as plt
+
+encoding_dim = 32
+
+# Build Autoencoder
+input_img = keras.Input(shape=(784,))
+encoded = layers.Dense(encoding_dim,
+                       activation='relu')(input_img)
+decoded = layers.Dense(784,
+                       activation='sigmoid')(encoded)
+
+autoencoder = keras.Model(input_img, decoded)
+encoder = keras.Model(input_img, encoded)
+
+encoded_input = keras.Input(shape=(encoding_dim,))
+decoder_layer = autoencoder.layers[-1]
+decoder = keras.Model(encoded_input,
+                      decoder_layer(encoded_input))
+
+autoencoder.compile(optimizer='adam',
+                    loss='binary_crossentropy')
+
+# Load Data
+(x_train, _), (x_test, _) = mnist.load_data()
+
+x_train = x_train.astype('float32') / 255
+x_test = x_test.astype('float32') / 255
+
+x_train = x_train.reshape((len(x_train), 784))
+x_test = x_test.reshape((len(x_test), 784))
+
+# Train Model
+autoencoder.fit(x_train, x_train,
+                epochs=50,
+                batch_size=256,
+                shuffle=True,
+                validation_data=(x_test, x_test))
+
+# Encode and Decode
+encoded_img = encoder.predict(x_test)
+decoded_imgs = decoder.predict(encoded_img)
+
+# Display Results
+n = 10
+plt.figure(figsize=(20, 4))
+
+for i in range(n):
+    # Original
+    plt.subplot(2, n, i + 1)
+    plt.imshow(x_test[i].reshape(28, 28))
+    plt.gray()
+    plt.axis('off')
+
+    # Reconstructed
+    plt.subplot(2, n, i + 1 + n)
+    plt.imshow(decoded_imgs[i].reshape(28, 28))
+    plt.gray()
+    plt.axis('off')
+
+plt.show()
 
 </textarea>
     <button onclick="copyToClipboard('text10', this)">encoding and decoding of images</button>
 
 <textarea id="text11" readonly>
 
+import numpy as np
+import matplotlib.pyplot as plt
+from tensorflow.keras.datasets import mnist
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Conv2D, MaxPooling2D
+from tensorflow.keras.layers import Flatten, Dense, Dropout
+from tensorflow.keras.utils import to_categorical
+
+# Load Data
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
+
+x_train = x_train / 255.0
+x_test = x_test / 255.0
+
+x_train = x_train.reshape(-1, 28, 28, 1)
+x_test = x_test.reshape(-1, 28, 28, 1)
+
+y_train = to_categorical(y_train, 10)
+y_test = to_categorical(y_test, 10)
+
+# Build CNN Model
+model = Sequential()
+model.add(Conv2D(32, (3, 3),
+                 activation='relu',
+                 input_shape=(28, 28, 1)))
+model.add(MaxPooling2D((2, 2)))
+model.add(Conv2D(64, (3, 3),
+                 activation='relu'))
+model.add(MaxPooling2D((2, 2)))
+model.add(Flatten())
+model.add(Dense(128, activation='relu'))
+model.add(Dropout(0.5))
+model.add(Dense(10, activation='softmax'))
+
+model.compile(optimizer='adam',
+              loss='categorical_crossentropy',
+              metrics=['accuracy'])
+
+# Train Model
+model.fit(x_train, y_train,
+          epochs=10,
+          batch_size=128,
+          validation_split=0.1)
+
+# Evaluate
+test_loss, test_acc = model.evaluate(x_test, y_test)
+print("Test accuracy:", test_acc)
+
+# Predict Sample
+index = 3
+prediction = model.predict(x_test[index].reshape(1, 28, 28, 1))
+predicted_digit = np.argmax(prediction)
+
+plt.imshow(x_test[index].reshape(28, 28),
+           cmap='gray')
+plt.title(f"Predicted Digit: {predicted_digit}")
+plt.axis('off')
+plt.show()
 
 </textarea>
     <button onclick="copyToClipboard('text11', this)">CNN predict numbers from number images</button>
 
 <textarea id="text12" readonly>
+import numpy as np
+import matplotlib.pyplot as plt
+from tensorflow.keras.datasets import mnist
+from tensorflow.keras.layers import Input, Dense, Flatten, Reshape
+from tensorflow.keras.models import Model
+
+# Load Data
+(x_train, _), (x_test, _) = mnist.load_data()
+
+x_train = x_train.astype('float32') / 255.
+x_test = x_test.astype('float32') / 255.
+
+x_train = x_train.reshape(-1, 28, 28, 1)
+x_test = x_test.reshape(-1, 28, 28, 1)
+
+# Add Noise
+noise_factor = 0.5
+x_train_noisy = x_train + noise_factor * np.random.normal(
+    0.0, 1.0, x_train.shape)
+
+x_test_noisy = x_test + noise_factor * np.random.normal(
+    0.0, 1.0, x_test.shape)
+
+x_train_noisy = np.clip(x_train_noisy, 0., 1.)
+x_test_noisy = np.clip(x_test_noisy, 0., 1.)
+
+# Build Autoencoder
+input_img = Input(shape=(28, 28, 1))
+
+x = Flatten()(input_img)
+x = Dense(128, activation='relu')(x)
+x = Dense(64, activation='relu')(x)
+
+x = Dense(128, activation='relu')(x)
+x = Dense(28 * 28, activation='sigmoid')(x)
+decoded = Reshape((28, 28, 1))(x)
+
+autoencoder = Model(input_img, decoded)
+
+autoencoder.compile(optimizer='adam',
+                    loss='binary_crossentropy')
+
+# Train Model
+autoencoder.fit(x_train_noisy, x_train,
+                epochs=10,
+                batch_size=256,
+                shuffle=True,
+                validation_data=(x_test_noisy, x_test))
+
+# Denoise Images
+decoded_imgs = autoencoder.predict(x_test_noisy)
+
+# Display Results
+n = 5
+plt.figure(figsize=(10, 4))
+
+for i in range(n):
+    plt.subplot(2, n, i + 1)
+    plt.imshow(x_test_noisy[i].reshape(28, 28),
+               cmap='gray')
+    plt.title("Noisy")
+    plt.axis('off')
+
+    plt.subplot(2, n, i + 1 + n)
+    plt.imshow(decoded_imgs[i].reshape(28, 28),
+               cmap='gray')
+    plt.title("Denoised")
+    plt.axis('off')
+
+plt.tight_layout()
+plt.show()
 
 
 </textarea>
@@ -123,4 +728,5 @@ print("\nEigenvectors:\n", e_vecs)
     </script>
 </body>
 </html>
+
 
