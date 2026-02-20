@@ -47,7 +47,8 @@ import tensorflow as tf
 
 # Build Model
 model = tf.keras.Sequential([
-    tf.keras.layers.Dense(2, activation='relu', input_dim=2),
+    tf.keras.Input(shape=(2,)),
+    tf.keras.layers.Dense(2, activation='relu'),
     tf.keras.layers.Dense(1, activation='sigmoid')
 ])
 
@@ -179,21 +180,24 @@ print("Predicted Class:", lb.inverse_transform(prediction))
 
 <textarea id="text4" readonly>
 from keras.models import Sequential
-from keras.layers import Dense
+from keras.layers import Dense, Input
 from sklearn.datasets import make_blobs
 from sklearn.preprocessing import MinMaxScaler
+
+print("Performed by Roll no.05, Roshni Gupta")
 
 # Generate Dataset
 x, y = make_blobs(n_samples=100, centers=2,
                   n_features=2, random_state=1)
 
 # Scaling
-scalar = MinMaxScaler()
-x = scalar.fit_transform(x)
+scaler = MinMaxScaler()
+x = scaler.fit_transform(x)
 
 # Build Model
 model = Sequential()
-model.add(Dense(4, input_dim=2, activation='relu'))
+model.add(Input(shape=(2,)))
+model.add(Dense(4, activation='relu'))
 model.add(Dense(4, activation='relu'))
 model.add(Dense(1, activation='sigmoid'))
 
@@ -209,7 +213,7 @@ model.fit(x, y, epochs=500, verbose=0)
 xnew, yreal = make_blobs(n_samples=3, centers=2,
                          n_features=2, random_state=1)
 
-xnew = scalar.transform(xnew)
+xnew = scaler.transform(xnew)
 ynew = model.predict(xnew)
 
 for i in range(len(xnew)):
@@ -273,45 +277,43 @@ print("Actual Predicted Values:", y_original)
 <textarea id="text6" readonly>
 
 from keras.models import Sequential
-from keras.layers import Dense
+from keras.layers import Dense, Input
 from sklearn.model_selection import KFold
 import numpy as np
 
-# Load Dataset
-dataset = np.genfromtxt("/content/sample_data/diabetes (1).csv",
-                        delimiter=",")
+print("Performed by Roll no.05, Roshni Gupta")
 
+# Load Dataset (put CSV in same folder)
+dataset = np.genfromtxt("C:/Users/Dell/Downloads/diabetes - diabetes (1).csv",delimiter=",")
 # Split Data
 x = dataset[:, 0:8]
 y = dataset[:, 8]
 
 # Define KFold
-kfold = KFold(n_splits=5, shuffle=True)
+kfold = KFold(n_splits=5, shuffle=True, random_state=1)
 
-# Create Model
-model = Sequential()
-model.add(Dense(12, input_dim=8, activation='relu'))
-model.add(Dense(8, activation='relu'))
-model.add(Dense(1, activation='sigmoid'))
-
-# Compile Model
-model.compile(loss='binary_crossentropy',
-              optimizer='adam',
-              metrics=['accuracy'])
-
-# Evaluate Model using KFold
-results = kfold.split(x)
-
-for train_index, test_index in results:
+# K-Fold Cross Validation
+for train_index, test_index in kfold.split(x):
     x_train, x_test = x[train_index], x[test_index]
     y_train, y_test = y[train_index], y[test_index]
 
-    model.fit(x_train, y_train,
-              epochs=150,
-              batch_size=10,
-              verbose=0)
+    # Create NEW model for each fold
+    model = Sequential()
+    model.add(Input(shape=(8,)))
+    model.add(Dense(12, activation='relu'))
+    model.add(Dense(8, activation='relu'))
+    model.add(Dense(1, activation='sigmoid'))
 
-    _, accuracy = model.evaluate(x_test, y_test)
+    # Compile Model
+    model.compile(loss='binary_crossentropy',
+                  optimizer='adam',
+                  metrics=['accuracy'])
+
+    # Train Model
+    model.fit(x_train, y_train, epochs=150, batch_size=10, verbose=0)
+
+    # Evaluate Model
+    _, accuracy = model.evaluate(x_test, y_test, verbose=0)
     print('Accuracy: %.2f' % (accuracy * 100))
 
 </textarea>
@@ -728,6 +730,7 @@ plt.show()
     </script>
 </body>
 </html>
+
 
 
 
